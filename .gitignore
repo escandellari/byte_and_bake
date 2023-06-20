@@ -1,0 +1,6 @@
+__pycache__
+db.sqlite3
+.my_pgpass
+.pg_service.conf
+.venv
+.env

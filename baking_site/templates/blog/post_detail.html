@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+  {{ object.title }}
+{% endblock title %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 card mb-4  mt-3 left  top">
+        <div class="card-body">
+          <h1>{{ object.title }}</h1>
+          <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
+          <p class="card-text ">{{ object.content | safe }}</p>
+          {% comment %} <img src="/media/MeKiwi.jpeg" style="width:128px;height:228px;"> {% endcomment %}
+          {% comment %} {{ object.images }} {% endcomment %}
+          {% for img in object.images.all %}
+            <div class="col-md-3">
+              <img src="/media/{{ img.image }}" style="width: 100%">
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% block sidebar %}
+        {% include 'sidebar.html' %}
+      {% endblock sidebar %}
+    </div>
+  </div>
+{% endblock content %}
