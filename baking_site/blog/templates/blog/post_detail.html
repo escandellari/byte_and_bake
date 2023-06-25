@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
   {{ object.title }}
 {% endblock title %}
@@ -13,15 +14,19 @@
           {% with object.images.all.0 as img %}
             {% if img %}
               <div class="col-md-3">
-                <img src="/media/{{ img }}" style="width: 100%">
+                <img src="blog/{{ img }}" style="width: 100%">
+                <p>{{ img }}</p>
+                <img src="{% static 'blog/{{ img }}' %}"
+                     alt="My image"
+                     style="width: 100%">
               </div>
             {% endif %}
           {% endwith %}
         </div>
       </div>
-      {% block sidebar %}
+      {% comment %} {% block sidebar %}
         {% include 'sidebar.html' %}
-      {% endblock sidebar %}
+      {% endblock sidebar %} {% endcomment %}
     </div>
   </div>
 {% endblock content %}

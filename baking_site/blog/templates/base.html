@@ -14,6 +14,7 @@
     </title>
   </head>
   <body>
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
             crossorigin="anonymous"></script>
@@ -32,10 +33,26 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'recipes' %}">Recipes</a>
+            </li>
+            {% comment %} <li class="nav-item">
               <a class="nav-link" href="{% url 'category' 'Recipes' %}">Recipes</a>
+            </li> {% endcomment %}
+            {% comment %} <li class="nav-item">
+              <a class="nav-link" href="{% url 'worldwide' %}">From around the world</a>
+              <ul class="dropdown-menu">
+                {% for item in category_menu %}
+                  <li>
+                    <a class="dropdown-item" href="{% url 'category' item|slugify %}">{{ item }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'category' 'Tips' %}">Tips</a>
+            </li> {% endcomment %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'category' 'Blog' %}">Blog</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'cheatsheets' %}">Cheatsheets</a>
