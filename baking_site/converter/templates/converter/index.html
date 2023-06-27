@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <div class="container">
+    <h1>CONVERTER</h1>
+    <h2>Cups to Grams Conversion Table</h2>
+    {% crispy converter_form %}
+    {% comment %} {% crispy example_form %} {% endcomment %}
+    {% comment %} <form action="{% url 'converter' %}" method="post">
+      {% csrf_token %}
+      {% crispy converter_form %}
+      {% crispy example_form %}
+    </form> {% endcomment %}
+    {% if submitted %}
+      <p>SUBMITTED</p>
+      <p>{{ result }}</p>
+    {% else %}
+      <p>NOT SUBMITTED</p>
+    {% endif %}
+  </div>
+{% endblock %}
