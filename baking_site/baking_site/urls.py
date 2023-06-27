@@ -24,6 +24,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", TemplateView.as_view(template_name="blog/index.html"), name="index"),
     path("blog/", include("blog.urls")),
+    path("converter/", include("converter.urls")),
     path("registration/", include("django.contrib.auth.urls")),
     path("registration/", include("registration.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

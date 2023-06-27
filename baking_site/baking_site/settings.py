@@ -46,9 +46,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Internal APPS
     "blog",
+    "converter",
     "registration",
     # External packages
     "ckeditor",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -158,3 +161,6 @@ MEDIA_URL = "/media/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "index"
 LOGOUT_REDIRECT_URL = "index"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
