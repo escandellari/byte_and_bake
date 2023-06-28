@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0005_rename_category_name_category_name'),
+        ('recipes', '0005_rename_category_name_category_name'),
     ]
 
     operations = [
@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='postimage',
             name='post',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='blog.post'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='recipes.post'),
         ),
     ]

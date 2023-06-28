@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0006_alter_category_options_alter_postimage_post'),
+        ('recipes', '0006_alter_category_options_alter_postimage_post'),
     ]
 
     operations = [

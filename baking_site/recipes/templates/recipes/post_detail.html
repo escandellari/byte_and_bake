@@ -14,9 +14,9 @@
           {% with object.images.all.0 as img %}
             {% if img %}
               <div class="col-md-3">
-                <img src="blog/{{ img }}" style="width: 100%">
+                <img src="recipes/{{ img }}" style="width: 100%">
                 <p>{{ img }}</p>
-                <img src="{% static 'blog/{{ img }}' %}"
+                <img src="{% static 'recipes/{{ img }}' %}"
                      alt="My image"
                      style="width: 100%">
               </div>

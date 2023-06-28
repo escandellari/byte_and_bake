@@ -45,13 +45,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Internal APPS
-    "blog",
+    "recipes",
     "converter",
     "registration",
     # External packages
     "ckeditor",
     "crispy_forms",
     "crispy_bootstrap5",
+    "django_rename_app",
 ]
 
 MIDDLEWARE = [

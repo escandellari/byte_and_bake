@@ -7,12 +7,12 @@ from .models import Post
 
 def category_view(request, name):
     post_list = Post.objects.filter(category__name=name)
-    return render(request, "blog/category.html", {"post_list": post_list, "category_name": name})
+    return render(request, "recipes/category.html", {"post_list": post_list, "category_name": name})
 
 
 def worldwide_view(request):
-    return render(request, "blog/worldwide.html")
+    return render(request, "recipes/worldwide.html")
 
 
 def recipes_view(request):
-    return render(request, "blog/recipes.html")
+    return render(request, "recipes/recipes.html")
