@@ -6,12 +6,13 @@ from crispy_forms.layout import HTML, Column, Fieldset, Layout, Row, Submit
 from django import forms
 from django.urls import reverse_lazy
 
-from .constants import CUPS_CHOICES, INGREDIENTS_CHOICES, INGREDIENTS_WEIGHT_CHOICES
+from .constants import CUPS_CHOICES, INGREDIENTS_WEIGHT_CHOICES
 
 
 class ConverterForm(forms.Form):
     uk_ingredient = forms.ChoiceField(label="UK Ingredient", choices=INGREDIENTS_WEIGHT_CHOICES)
     cups = forms.ChoiceField(label="Cups", choices=CUPS_CHOICES)
+    # yeast = forms.ChoiceField(label="Yeast", choices=YEAST_CHOICES)
     # grams = forms.IntegerField()
 
     def __init__(self, *args, **kwargs):
@@ -20,36 +21,30 @@ class ConverterForm(forms.Form):
         self.helper.form_action = reverse_lazy("converter")
         self.helper.form_method = "POST"
         self.helper.layout = Layout(
-            Row(
-                Column("uk_ingredient", css_class="form-group col-md-4 mb-0"),
-                Column("cups", css_class="form-group col-md-4 mb-0"),
-                Column(HTML("{% if submitted %}{{ cups_to_grams }}g{% endif %}"), css_class="form-group col-md-4 mb-0"),
-                # Column("grams", css_class="form-group col-md-4 mb-0"),
-                css_class="form-row",
+            Div(
+                Div("uk_ingredient", css_class="form-group col-md-2 mb-0"),
+                Div("cups", css_class="form-group col-md-2 mb-0"),
+                Div(FormActions(Submit("save", "Convert"))),
+                Div(
+                    HTML("{% if submitted %} Conversion: {{ cups_to_grams }}g {% endif %}"),
+                    css_class="form-group col-md-2 mb-0",
+                ),
             ),
             # Row(
-            #     Column("favorite_number", css_class="form-group col-md-4 mb-0"),
-            #     Column("favorite_color", css_class="form-group col-md-4 mb-0"),
-            #     Column("favorite_food", css_class="form-group col-md-4 mb-0"),
+            #     Column("uk_ingredient", css_class="form-group col-md-4 mb-0"),
+            #     Column("cups", css_class="form-group col-md-2 mb-0"),
+            #     Column(HTML("{% if submitted %}{{ cups_to_grams }}g{% endif %}"), css_class="form-group col-md-2 mb-0"),
+            #     # Column("grams", css_class="form-group col-md-4 mb-0"),
             #     css_class="form-row",
             # ),
-            # "notes",
-            # Fieldset(
-            #     "Tell us your favorite stuff {{ username }}",
-            #     "like_website",
-            #     "favorite_number",
-            #     "favorite_color",
-            #     "favorite_food",
-            #     HTML(
-            #         """
-            #             <p>We use notes to get better, <strong>please help us {{ username }}</strong></p>
-            #         """
-            #     ),
-            #     "notes",
+            # InlineField("uk_ingredient", css_class="form-group col-md-4 mb-0"),
+            # InlineField("cups", css_class="form-group col-md-2 mb-0"),
+            # InlineField(
+            #     HTML("{% if submitted %}{{ cups_to_grams }}g{% endif %}"), css_class="form-group col-md-2 mb-0"
             # ),
-            FormActions(
-                Submit("save", "Convert"),
-            ),
+            # FormActions(
+            #     Submit("save", "Convert"),
+            # ),
         )
 
 

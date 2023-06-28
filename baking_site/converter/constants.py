@@ -16,6 +16,16 @@ CUPS_CHOICES = [
     (TWO_TBSP, "2 tbsp"),
 ]
 
+# YEAST_CHOICES = [
+#     ("3", "1.5", "1"),
+#     ("6", "3", "2"),
+#     ("10", "4", "3"),
+#     ("12", "6", "4"),
+#     ("17", "7", "5"),
+#     ("34", "14", "10"),
+#     ("68", "28", "20"),
+# ]
+
 INGREDIENTS_WEIGHT_CHOICES = [
     ("340", "Black Treacle"),
     ("150", "Breadcrumbs (dry)"),
@@ -40,30 +50,4 @@ INGREDIENTS_WEIGHT_CHOICES = [
     ("200", "Sultanas/Raisins"),
     ("200", "Vegetable oil"),
     ("245", "Whole Milk"),
-]
-
-INGREDIENTS_CHOICES = [
-    ("black_treacle", "Black Treacle"),
-    ("breadcrumbs_dry", "Breadcrumbs (dry)"),
-    ("brown_sugar", "Brown Sugar"),
-    ("butter", "Butter"),
-    ("caster_sugar", "Caster sugar"),
-    ("coconut_oil", "Coconut oil"),
-    ("cornflour", "Cornflour"),
-    ("desiccated_coconut", "Desiccated coconut"),
-    ("digestive_biscuits", "Digestive biscuits"),
-    ("double_cream", "Double cream"),
-    ("flour_sieved", "Flour (sieved)"),
-    ("golden_syrup", "Golden syrup"),
-    ("granulated_sugar", "Granulated sugar"),
-    ("honey_maple_syrup", "Honey/Maple syrup"),
-    ("icing_sugar", "Icing Sugar"),
-    ("nuts_chopped", "Nuts (chopped)"),
-    ("nuts_ground", "Nuts (ground)"),
-    ("oats_uncooked", "Oats (uncooked)"),
-    ("plain_flour", "Plain Flour"),
-    ("self_raising_flour", "Self Raising Flour"),
-    ("sultanas_raisins", "Sultanas/Raisins"),
-    ("vegetable_oil", "Vegetable oil"),
-    ("whole_milk", "Whole Milk"),
 ]
