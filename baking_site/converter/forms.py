@@ -6,11 +6,11 @@ from crispy_forms.layout import HTML, Column, Fieldset, Layout, Row, Submit
 from django import forms
 from django.urls import reverse_lazy
 
-from .constants import CUPS_CHOICES, INGREDIENTS_CHOICES
+from .constants import CUPS_CHOICES, INGREDIENTS_CHOICES, INGREDIENTS_WEIGHT_CHOICES
 
 
 class ConverterForm(forms.Form):
-    uk_ingredient = forms.ChoiceField(label="UK Ingredient", choices=INGREDIENTS_CHOICES)
+    uk_ingredient = forms.ChoiceField(label="UK Ingredient", choices=INGREDIENTS_WEIGHT_CHOICES)
     cups = forms.ChoiceField(label="Cups", choices=CUPS_CHOICES)
     # grams = forms.IntegerField()
 
@@ -23,6 +23,7 @@ class ConverterForm(forms.Form):
             Row(
                 Column("uk_ingredient", css_class="form-group col-md-4 mb-0"),
                 Column("cups", css_class="form-group col-md-4 mb-0"),
+                Column(HTML("{% if submitted %}{{ cups_to_grams }}g{% endif %}"), css_class="form-group col-md-4 mb-0"),
                 # Column("grams", css_class="form-group col-md-4 mb-0"),
                 css_class="form-row",
             ),

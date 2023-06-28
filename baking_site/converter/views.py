@@ -1,8 +1,8 @@
 from crispy_forms.utils import render_crispy_form
 from django.shortcuts import redirect, render
 
-from .constants import CUPS_CHOICES, INGREDIENTS_CHOICES
 from .forms import ConverterForm, ExampleForm
+from .utils import convert_cups_to_grams
 
 
 def example_view(request):
@@ -33,52 +33,14 @@ def converter_view(request):
     converter_form = ConverterForm()
     if request.method == "POST":
         converter_form = ConverterForm(request.POST)
-
-        print(converter_form)
         if converter_form.is_valid():
             uk_ingredient = request.POST["uk_ingredient"]
             cups = request.POST["cups"]
-
-            if uk_ingredient == "oats_uncooked":
-                one_cup = 90
-            if uk_ingredient in ["desiccated_coconut", "digestive_biscuits"]:
-                one_cup = 100
-            elif uk_ingredient == "flour_sieved":
-                one_cup = 110
-            elif uk_ingredient in ["plain_flour", "self_raising_flour", "cornflour", "nuts_ground"]:
-                one_cup = 120
-            elif uk_ingredient == "icing_sugar":
-                one_cup = 125
-            elif uk_ingredient in ["nuts_chopped", "breadcrumbs_dry"]:
-                one_cup = 150
-            elif uk_ingredient in [
-                "granulated_sugar",
-                "caster_sugar",
-                "brown_sugar",
-                "coconut_oil",
-                "vegetable_oil",
-                "sultanas_raisins",
-            ]:
-                one_cup = 200
-            elif uk_ingredient in ["butter", "double_cream"]:
-                one_cup = 240
-            elif uk_ingredient == "whole_milk":
-                one_cup = 245
-            elif uk_ingredient == "honey_maple_syrup":
-                one_cup = 322
-            elif uk_ingredient == "black_treacle":
-                one_cup = 340
-            elif uk_ingredient == "golden_syrup":
-                one_cup = 350
-
-            print(uk_ingredient)
-            print(one_cup)
+            cups_to_grams = convert_cups_to_grams(uk_ingredient, cups)
             submitted = True
-            result = uk_ingredient + " - " + cups + " - " + str(one_cup)
-
             context = {
                 "converter_form": converter_form,
-                "result": result,
+                "cups_to_grams": cups_to_grams,
                 "submitted": submitted,
             }
             return render(request, "converter/index.html", context=context)
