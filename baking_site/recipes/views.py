@@ -1,8 +1,27 @@
-from django.forms import modelformset_factory
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views import generic
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, UpdateView
 
+from .forms import AddRecipeForm, EditRecipeForm
 from .models import Post
+
+
+class AddRecipeView(CreateView):
+    model = Post
+    form_class = AddRecipeForm
+    template_name = "recipes/add_recipe.html"
+
+
+class EditRecipeView(UpdateView):
+    model = Post
+    form_class = EditRecipeForm
+    template_name = "recipes/edit_recipe.html"
+
+
+class DeleteRecipeView(DeleteView):
+    model = Post
+    template_name = "recipes/delete_recipe.html"
+    success_url = reverse_lazy("recipes")
 
 
 def recipes_view(request):

@@ -1,6 +1,8 @@
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
+from django.template.defaultfilters import slugify as default_slugify
+from django.urls import reverse
 
 STATUS = ((0, "Draft"), (1, "Publish"))
 
@@ -24,6 +26,18 @@ class Post(models.Model):
     @property
     def post_images(self):
         return self.postimage_set.all()
+
+    def get_absolute_url(self):
+        return reverse("post_detail", kwargs={"slug": self.slug})
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.slug = self.slugify(self.title)
+        return super(Post, self).save(*args, **kwargs)
+
+    def slugify(self, tag):
+        slug = default_slugify(tag)
+        return slug
 
 
 class PostImage(models.Model):

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+    Add a new recipe
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <h1>Add Recipe</h1>
+        <div class="form-group">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button>Add</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

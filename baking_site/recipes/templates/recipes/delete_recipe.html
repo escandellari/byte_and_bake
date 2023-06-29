@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}
+    Delete recipe
+{% endblock title %}
+{% block content %}
+    <div class="container">
+        <h1>Delete {{ post.title }}</h1>
+        <div class="form-group">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <strong>Are you sure?</strong>
+                <br>
+                <input type="submit" name="update" value="Delete" />
+                <input type="submit" name="cancel" value="Cancel" />
+            </form>
+        </div>
+    </div>
+{% endblock content %}
