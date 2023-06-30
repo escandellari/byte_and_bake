@@ -4,15 +4,19 @@
 {% endblock title %}
 {% block content %}
     <div class="container">
-        <h1>Delete {{ post.title }}</h1>
-        <div class="form-group">
-            <form action="" method="POST">
-                {% csrf_token %}
-                <strong>Are you sure?</strong>
-                <br>
-                <input type="submit" name="update" value="Delete" />
-                <input type="submit" name="cancel" value="Cancel" />
-            </form>
-        </div>
+        {% if user.is_authenticated %}
+            <h1>Delete {{ post.title }}</h1>
+            <div class="form-group">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <strong>Are you sure?</strong>
+                    <br>
+                    <input type="submit" name="update" value="Delete" />
+                    <input type="submit" name="cancel" value="Cancel" />
+                </form>
+            </div>
+        {% else %}
+            <h1>Please login to delete post</h1>
+        {% endif %}
     </div>
 {% endblock content %}

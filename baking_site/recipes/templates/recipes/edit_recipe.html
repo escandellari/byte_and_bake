@@ -4,14 +4,18 @@
 {% endblock title %}
 {% block content %}
     <div class="container">
-        <h1>Edit Recipe</h1>
-        <div class="form-group">
-            <form action="" method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" name="update" value="Update" />
-                <input type="submit" name="cancel" value="Cancel" />
-            </form>
-        </div>
+        {% if user.is_authenticated %}
+            <h1>Edit Recipe</h1>
+            <div class="form-group">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" name="update" value="Update" />
+                    <input type="submit" name="cancel" value="Cancel" />
+                </form>
+            </div>
+        {% else %}
+            <h1>Please login to edit post</h1>
+        {% endif %}
     </div>
 {% endblock content %}

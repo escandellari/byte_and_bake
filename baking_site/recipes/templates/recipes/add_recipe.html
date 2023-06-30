@@ -4,13 +4,17 @@
 {% endblock title %}
 {% block content %}
     <div class="container">
-        <h1>Add Recipe</h1>
-        <div class="form-group">
-            <form action="" method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button>Add</button>
-            </form>
-        </div>
+        {% if user.is_authenticated %}
+            <h1>Add Recipe</h1>
+            <div class="form-group">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button>Add</button>
+                </form>
+            </div>
+        {% else %}
+            <h1>Please login to add post</h1>
+        {% endif %}
     </div>
 {% endblock content %}
