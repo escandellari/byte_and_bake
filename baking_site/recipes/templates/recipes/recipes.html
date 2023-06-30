@@ -12,8 +12,7 @@
                     <div class="card-body">
                         <h5 class="card-title">From Around the World</h5>
                         <p class="card-text">Recreating foods from all over the world, maybe with a twist</p>
-                        {% comment %} <a href="#" class="btn btn-primary">Go somewhere</a> {% endcomment %}
-                        <a class="btn btn-primary" href="{% url 'worldwide' %}">Go</a>
+                        <a class="btn btn-primary" href="{% url 'category' 'Worldwide' %}">Go</a>
                     </div>
                 </div>
             </div>
@@ -24,7 +23,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Breads</h5>
                             <p class="card-text">The breads that we love and cherish</p>
-                            <a class="btn btn-primary" href="{% url 'bread' %}">Go</a>
+                            <a class="btn btn-primary" href="{% url 'category' 'Bread' %}">Go</a>
                         </div>
                     </div>
                 </div>
@@ -35,7 +34,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Cakes</h5>
                         <p class="card-text">For those occasions where you want to impress, or just fancy one for yourself</p>
-                        <a class="btn btn-primary" href="{% url 'cakes' %}">Go</a>
+                        <a class="btn btn-primary" href="{% url 'category' 'Cakes' %}">Go</a>
                     </div>
                 </div>
             </div>
@@ -45,11 +44,10 @@
                     <div class="card-body">
                         <h5 class="card-title">Biscuits</h5>
                         <p class="card-text">Because everyone loves a homemade biscuit</p>
-                        <a class="btn btn-primary" href="{% url 'biscuits' 'biscuits' %}">Go</a>
+                        <a class="btn btn-primary" href="{% url 'category' 'Biscuits' %}">Go</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock content %}

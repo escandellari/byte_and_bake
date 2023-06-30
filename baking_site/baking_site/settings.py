@@ -32,7 +32,7 @@ SECRET_KEY = "django-insecure-egh@k20jm%!kt-oi03&l7(#k^mp&qf4t-3*ltz83+2yj^v0c&p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["byteandbake.eu.pythonanywhere.com"]
+ALLOWED_HOSTS = ["byteandbake.eu.pythonanywhere.com", "127.0.0.1"]
 
 
 # Application definition
@@ -142,14 +142,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "static"
-MEDIA_ROOT = STATIC_ROOT / "media"
-MEDIA_URL = "/media/"
+STATIC_URL = "static/"
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "staticfiles"),
-]
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# STATIC_URL = "/static/"
+# STATIC_ROOT = BASE_DIR / "static"
+# MEDIA_ROOT = STATIC_ROOT / "media"
+# MEDIA_URL = "/media/"
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "staticfiles"),
+# ]
 
 # Log all SQL
 # LOGGING = {
