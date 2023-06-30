@@ -5,12 +5,5 @@
     <h1>CONVERTER</h1>
     <h2>Cups to Grams Conversion Table</h2>
     {% crispy converter_form %}
-    {% comment %} {% crispy example_form %} {% endcomment %}
-    {% comment %} <form action="{% url 'converter' %}" method="post">
-      {% csrf_token %}
-      {% crispy converter_form %}
-      {% crispy example_form %}
-    </form> {% endcomment %}
-    {% comment %} {% if submitted %}<p>{{ result }}</p>{% endif %} {% endcomment %}
   </div>
 {% endblock %}
