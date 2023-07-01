@@ -17,23 +17,16 @@
               <a href="{% url 'delete_recipe' post.slug %}">Delete</a>
             {% endif %}
           </p>
-          <p class="card-text ">{{ object.content | safe }}</p>
           {% with object.images.all.0 as img %}
             {% if img %}
               <div class="col-md-3">
-                <img src="recipes/{{ img }}" style="width: 100%">
-                <p>{{ img }}</p>
-                <img src="{% static 'recipes/{{ img }}' %}"
-                     alt="My image"
-                     style="width: 100%">
+                <img src="/media/{{ img.image }}" style="width: 100%">
               </div>
             {% endif %}
           {% endwith %}
+          <p class="card-text ">{{ object.content | safe }}</p>
         </div>
       </div>
-      {% comment %} {% block sidebar %}
-        {% include 'sidebar.html' %}
-      {% endblock sidebar %} {% endcomment %}
     </div>
   </div>
 {% endblock content %}
