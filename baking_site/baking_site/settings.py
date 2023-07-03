@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Internal APPS
     "recipes",
+    "ricette",
     "converter",
     "registration",
     # External packages
