@@ -35,9 +35,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item">
+            {% comment %} <li class="nav-item">
               <a class="nav-link" href="{% url 'recipes' %}">Recipes</a>
-            </li>
+            </li> {% endcomment %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'ricette' %}">Ricette</a>
             </li>
@@ -48,9 +48,9 @@
               <a class="nav-link" href="{% url 'converter' %}">Converter</a>
             </li>
             {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'recipe_add' %}">Aggiungi</a>
-            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'recipe_add' %}">Aggiungi</a>
+              </li>
               {% comment %} <a class="nav-link" href="{% url 'addPost' %}">Add Post</a>
               <a class="nav-link" href="{% url 'addCategory' %}">Add Category</a>
               <a class="nav-link" href="{% url 'editProfile' %}">Edit Profile</a> {% endcomment %}
