@@ -11,8 +11,10 @@
                     {% csrf_token %}
                     <strong>Are you sure?</strong>
                     <br>
-                    <input type="submit" name="update" value="Delete" />
-                    <input type="submit" name="cancel" value="Cancel" />
+                    <input type="submit" name="delete" value="Delete" class="btn btn-primary" />
+                    <a name="cancel"
+                       class="btn btn-primary"
+                       href="javascript:window.history.back()">Cancel</a>
                 </form>
             </div>
         {% else %}

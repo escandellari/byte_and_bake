@@ -39,23 +39,23 @@
               <a class="nav-link" href="{% url 'recipes' %}">Recipes</a>
             </li> {% endcomment %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'ricette' %}">Ricette</a>
+              <a class="nav-link" href="{% url 'recipes' %}">Recipes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'category' 'Blog' %}">Blog</a>
+              <a class="nav-link" href="{% url 'blog_home' %}">Blog</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'converter' %}">Converter</a>
             </li>
             {% if user.is_authenticated %}
-              <li class="nav-item">
+              {% comment %} <li class="nav-item">
                 <a class="nav-link" href="{% url 'recipe_add' %}">Aggiungi</a>
-              </li>
+              </li> {% endcomment %}
               {% comment %} <a class="nav-link" href="{% url 'addPost' %}">Add Post</a>
               <a class="nav-link" href="{% url 'addCategory' %}">Add Category</a>
               <a class="nav-link" href="{% url 'editProfile' %}">Edit Profile</a> {% endcomment %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'add_recipe' %}">Add Recipe</a>
+                <a class="nav-link" href="{% url 'recipe_add' %}">Add Recipe</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
