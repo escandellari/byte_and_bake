@@ -45,9 +45,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Internal APPS
-    "recipes",
-    "ricette",
     "converter",
+    "recipes",
     "registration",
     # External packages
     "ckeditor",
@@ -71,7 +70,7 @@ ROOT_URLCONF = "baking_site.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
