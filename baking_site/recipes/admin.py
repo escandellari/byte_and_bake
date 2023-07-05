@@ -1,15 +1,18 @@
 from django.contrib import admin
 
-from .models import Category, Post, PostImage
+from .models import Category, Recipe
 
 
-class PostAdmin(admin.ModelAdmin):
-    list_display = ("title", "slug", "status", "created_on")
-    list_filter = ("status",)
-    search_fields = ["title", "content"]
+class RecipeAdmin(admin.ModelAdmin):
+    list_display = (
+        "title",
+        "slug",
+        "created_on",
+        "prep_time",
+    )
+    search_fields = ["title", "content", "serves"]
     prepopulated_fields = {"slug": ("title",)}
 
 
-admin.site.register(Post, PostAdmin)
-admin.site.register(PostImage)
+admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(Category)

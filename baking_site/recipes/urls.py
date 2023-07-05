@@ -1,30 +1,14 @@
 from django.urls import path
 from django.views.generic import DetailView
 
-from .models import Post
-from .views import (
-    AddRecipeView,
-    DeleteRecipeView,
-    EditRecipeView,
-    biscuits_view,
-    bread_view,
-    cakes_view,
-    category_view,
-    recipes_view,
-    worldwide_view,
-)
+from .models import Recipe
+from .views import DeleteRecipeView, EditRecipeView, category_view, recipe_add_view, recipes_view
 
 urlpatterns = [
-    # path("", views.PostList.as_view(), name="post_list"),
-    # path("<slug:slug>/", views.PostDetail.as_view(), name="post_detail"),
     path("", recipes_view, name="recipes"),
-    path("add_recipe/", AddRecipeView.as_view(), name="add_recipe"),
-    path("edit_recipe/<slug:slug>", EditRecipeView.as_view(), name="edit_recipe"),
-    path("delete_recipe/<slug:slug>", DeleteRecipeView.as_view(), name="delete_recipe"),
-    path("<slug:slug>/", DetailView.as_view(model=Post), name="post_detail"),
-    path("biscuits/<str:name>", biscuits_view, name="biscuits"),
     path("category/<str:name>", category_view, name="category"),
-    path("worldwide", worldwide_view, name="worldwide"),
-    path("bread", bread_view, name="bread"),
-    path("cakes", cakes_view, name="cakes"),
+    path("recipe_add/", recipe_add_view, name="recipe_add"),
+    path("recipe_edit/<slug:slug>", EditRecipeView.as_view(), name="recipe_edit"),
+    path("recipe_delete/<slug:slug>", DeleteRecipeView.as_view(), name="recipe_delete"),
+    path("<slug:slug>/", DetailView.as_view(model=Recipe), name="recipe_detail"),
 ]

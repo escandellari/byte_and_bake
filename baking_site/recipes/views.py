@@ -1,50 +1,51 @@
-from django.shortcuts import get_object_or_404, redirect, render
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render, reverse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, UpdateView
 
 from .forms import AddRecipeForm, EditRecipeForm
-from .models import Post
-
-
-class AddRecipeView(CreateView):
-    model = Post
-    form_class = AddRecipeForm
-    template_name = "recipes/add_recipe.html"
-
-
-class EditRecipeView(UpdateView):
-    model = Post
-    form_class = EditRecipeForm
-    template_name = "recipes/edit_recipe.html"
-
-
-class DeleteRecipeView(DeleteView):
-    model = Post
-    template_name = "recipes/delete_recipe.html"
-    success_url = reverse_lazy("recipes")
+from .models import Recipe
 
 
 def recipes_view(request):
-    return render(request, "recipes/recipes.html")
+    return render(request, "recipes/index.html")
 
 
 def category_view(request, name):
-    post_list = Post.objects.filter(category__name=name)
-    return render(request, "recipes/category.html", {"post_list": post_list, "category_name": name})
+    recipe_list = Recipe.objects.filter(category=name)
+    return render(request, "recipes/category.html", {"recipe_list": recipe_list, "category_name": name})
 
 
-def worldwide_view(request):
-    return render(request, "recipes/worldwide.html")
+def recipe_add_view(request):
+    recipe_form = AddRecipeForm()
+    if request.method == "POST":
+        recipe_form = AddRecipeForm(request.POST, request.FILES)
+        if recipe_form.is_valid():
+            recipe = recipe_form.save()
+            return redirect(reverse("recipe_detail", kwargs={"slug": recipe.slug}))
+    else:
+        context = {"recipe_form": recipe_form}
+        return render(request, "recipes/recipe_add.html", context=context)
 
 
-def bread_view(request):
-    return render(request, "recipes/bread.html")
+class EditRecipeView(UpdateView):
+    model = Recipe
+    form_class = EditRecipeForm
+    template_name = "recipes/recipe_edit.html"
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            url = reverse_lazy("recipe_detail")
+            return HttpResponseRedirect(url)
+        else:
+            return super(EditRecipeView, self).post(request, *args, **kwargs)
 
 
-def biscuits_view(request, name):
-    post_list = Post.objects.filter(category__name=name)
-    return render(request, "recipes/biscuits.html", {"post_list": post_list, "category_name": name})
+class DeleteRecipeView(DeleteView):
+    model = Recipe
+    template_name = "recipes/recipe_delete.html"
+    success_url = reverse_lazy("recipes")
 
-
-def cakes_view(request):
-    return render(request, "recipes/cakes.html")
+    def post(self, request, *args, **kwargs):
+        if not "cancel" in request.POST:
+            return super(DeleteRecipeView, self).post(request, *args, **kwargs)

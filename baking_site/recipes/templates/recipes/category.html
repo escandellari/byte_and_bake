@@ -1,10 +1,12 @@
 {% extends "base.html" %}
-{% block title %}{{ category_name }}{% endblock %}
+{% block title %}
+    {{ category_name | title }}
+{% endblock title %}
 {% block content %}
     <div class="container crf-cigar-banner">
         <div class="crf-cigar-banner--container justify-content-center">
-            <h2>Posts in category "{{ category_name }}"</h2>
-            {% include 'recipes/post_list.html' %}
+            <h2>{{ category_name | title }}</h2>
+            {% include "recipes/recipe_list.html" %}
         </div>
     </div>
-{% endblock %}
+{% endblock content %}

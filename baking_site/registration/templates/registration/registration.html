@@ -3,10 +3,8 @@
   Register
 {% endblock title %}
 {% block content %}
-  <h1>Register</h1>
-  <br>
-  <br>
-  <div class="mb-3">
+  <div class="mb-3 container">
+    <h1>Register</h1>
     <form method='POST'>
       {% csrf_token %}
       {{ form.as_p }}

@@ -1,27 +1,53 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-  Welcome to Byte and Bake
+    Recipes
 {% endblock title %}
 {% block content %}
-  <header class="masthead">
-    <div class="overlay"></div>
     <div class="container">
-      <div class="row">
-        <div class=" col-md-8 col-md-10 mx-auto">
-          <div class="site-heading">
-            <img src="/media/banner2.png" class="img-fluid" alt="Responsive image">
-            <h3 class=" site-heading my-4 mt-3 text-blue logo">Welcome to Byte and Bake</h3>
-            <p class="text-dark">
-              Join me in the wild adventure of the baking world.
-              <br>
-              Here you'll find my successes and my failures.
-              <br>
-              Come and experiment with me!
-            </p>
-          </div>
+        <div class="row">
+            <div class="column">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'img/world_map.png' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">From Around the World</h5>
+                        <p class="card-text">Recreating foods from all over the world, maybe with a twist</p>
+                        <a class="btn btn-primary" href="{% url 'category' 'worldwide' %}">Go</a>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card" style="width: 18rem;">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{% static 'img/bread.png' %}" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">Breads</h5>
+                            <p class="card-text">The breads that we love and cherish</p>
+                            <a class="btn btn-primary" href="{% url 'category' 'bread' %}">Go</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'img/cake.png' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Cakes</h5>
+                        <p class="card-text">For those occasions where you want to impress, or just fancy one for yourself</p>
+                        <a class="btn btn-primary" href="{% url 'category' 'cakes' %}">Go</a>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% static 'img/cookies.png' %}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Biscuits</h5>
+                        <p class="card-text">Because everyone loves a homemade biscuit</p>
+                        <a class="btn btn-primary" href="{% url 'category' 'biscuits' %}">Go</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </header>
-{% endblock %}
+{% endblock content %}
