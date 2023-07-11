@@ -1,6 +1,7 @@
 __pycache__
 db.sqlite3
-.my_pgpass
-.pg_service.conf
+.DS_Store
 .venv
 .env
+ignore_folder
+media
