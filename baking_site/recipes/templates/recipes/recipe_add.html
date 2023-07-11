@@ -2,12 +2,67 @@
 {% block content %}
   <div class="container">
     <h1>Add recipe</h1>
-    <div class="form-group">
-      <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ recipe_form.as_p }}
-        <button>Add</button>
-      </form>
-    </div>
+    {% if user.is_authenticated %}
+      <div class="form-group">
+        <form class="row g-3" action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ recipe_form.media }}
+          <div class="col-md-4">
+            <label for="id_title" class="form-label">Title:</label>
+            {{ recipe_form.title }}
+          </div>
+          <div class="col-md-4">
+            <label for="id_snippet" class="form-label">Snippet:</label>
+            {{ recipe_form.snippet }}
+          </div>
+          <div class="col-md-3">
+            <label for="category" class="form-label">Category:</label>
+            {{ recipe_form.category }}
+          </div>
+          <div class="col-md-3">
+            <label for="prep_time" class="form-label">Prep Time:</label>
+            {{ recipe_form.prep_time }}
+          </div>
+          <div class="col-md-3">
+            <label for="cook_time" class="form-label">Cook Time:</label>
+            {{ recipe_form.cook_time }}
+          </div>
+          <div class="col-md-3">
+            <label for="proof_time" class="form-label">Proof Time:</label>
+            {{ recipe_form.proof_time }}
+          </div>
+          <div class="col-md-3">
+            <label for="serves" class="form-label">Serves:</label>
+            {{ recipe_form.serves }}
+          </div>
+          <div class="col-md-4">
+            <label for="image" class="form-label">Image:</label>
+            <br>
+            {{ recipe_form.image }}
+          </div>
+          <div class="col-md-12">
+            <label for="ingredients" class="form-label">Ingredients:</label>
+            <br>
+            {{ recipe_form.ingredients }}
+          </div>
+          <div class="col-md-12">
+            <label for="method" class="form-label">Method:</label>
+            <br>
+            {{ recipe_form.method }}
+          </div>
+          <button class="btn btn-primary">Add</button>
+        </form>
+        <script>
+          var name = "{{ user.id }}";
+          document.getElementById("author").value = name;
+        </script>
+      </div>
+    {% else %}
+      <br>
+      <br>
+      <h1>Please login to add post</h1>
+      <br>
+      <br>
+    {% endif %}
   </div>
 {% endblock %}
