@@ -2,6 +2,11 @@ from django import forms
 
 from .models import Category, Recipe
 
+try:
+    categories_list = list(Category.objects.all().values_list("name", "name"))
+except NameError:
+    categories_list = []
+
 
 class AddRecipeForm(forms.ModelForm):
     class Meta:
@@ -23,7 +28,7 @@ class AddRecipeForm(forms.ModelForm):
         widgets = {
             "title": forms.TextInput(attrs={"class": "form-control"}),
             "author": forms.Select(attrs={"class": "form-control", "value": "", "id": "author", "type": "hidden"}),
-            "category": forms.Select(attrs={"class": "form-control"}),
+            "category": forms.Select(choices=categories_list, attrs={"class": "form-control"}),
             "prep_time": forms.TextInput(attrs={"class": "form-control"}),
             "cook_time": forms.TextInput(attrs={"class": "form-control"}),
             "proof_time": forms.TextInput(attrs={"class": "form-control"}),
