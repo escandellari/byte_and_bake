@@ -23,8 +23,12 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", TemplateView.as_view(template_name="index.html"), name="index"),
+    path("blog/", include("blog.urls")),
     path("recipes/", include("recipes.urls")),
     path("converter/", include("converter.urls")),
     path("registration/", include("django.contrib.auth.urls")),
     path("registration/", include("registration.urls")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

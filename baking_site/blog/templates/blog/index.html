@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Welcome to my stream of madness</h1>
+  <ul>
+    {% for post in object_list %}
+      <li>
+        <a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a> -
+        {% comment %} <a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a> - {% endcomment %}
+        {{ post.author }} -
+        {{ post.date_published }}
+        {% if user.is_authenticated and user.id == post.author.id %}
+          <small>
+            <a href="{% url 'post_edit' post.slug %}">Edit</a> -
+            <a href="{% url 'post_delete' post.slug %}">Delete</a>
+          </small>
+        {% endif %}
+        <br>
+        {{ post.snippet |safe }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

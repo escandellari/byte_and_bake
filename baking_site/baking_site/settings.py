@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Internal APPS
+    "blog",
     "converter",
     "recipes",
     "registration",
@@ -144,9 +145,10 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
-# STATIC_ROOT = BASE_DIR / "static"
-# MEDIA_ROOT = STATIC_ROOT / "media"
+
+# Path where media is stored
 MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 # Log all SQL
