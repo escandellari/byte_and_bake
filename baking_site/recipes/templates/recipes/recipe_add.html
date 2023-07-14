@@ -15,6 +15,10 @@
             <label for="id_snippet" class="form-label">Snippet:</label>
             {{ recipe_form.snippet }}
           </div>
+          <div class="col-md-4">
+            <label for="author " class="form-label">Author:</label>
+            {{ recipe_form.author }}
+          </div>
           <div class="col-md-3">
             <label for="category" class="form-label">Category:</label>
             {{ recipe_form.category }}
@@ -56,6 +60,7 @@
           var name = "{{ user.id }}";
           document.getElementById("author").value = name;
         </script>
+        <p>{{ name }}</p>
       </div>
     {% else %}
       <br>
