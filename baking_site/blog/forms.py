@@ -39,7 +39,7 @@ class PostForm(forms.ModelForm):
 class EditForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ("title", "title_tag", "snippet", "body")
+        fields = ("title", "title_tag", "snippet", "category", "body")
 
         widgets = {
             "title": forms.TextInput(
@@ -51,6 +51,12 @@ class EditForm(forms.ModelForm):
                 attrs={
                     "class": "form-control",
                 }
+            ),
+            "category": forms.Select(
+                choices=categories_list,
+                attrs={
+                    "class": "form-control",
+                },
             ),
             "snippet": forms.TextInput(attrs={"class": "form-control"}),
             "body": forms.Textarea(
