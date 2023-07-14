@@ -9,12 +9,12 @@ from .models import Category, Post
 
 
 class PostForm(forms.ModelForm):
-    categories_list = [
-        ("baking", "baking"),
-        ("about me", "about me"),
-    ]
-
     class Meta:
+        categories_list = [
+            ("baking", "baking"),
+            ("about me", "about me"),
+        ]
+
         model = Post
         fields = ("title", "title_tag", "author", "category", "snippet", "header_image", "body")
 
