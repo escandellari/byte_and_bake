@@ -2,10 +2,17 @@ from django import forms
 
 from .models import Category, Recipe
 
-try:
-    categories_list = list(Category.objects.all().values_list("name", "name"))
-except NameError:
-    categories_list = []
+# try:
+#     categories_list = list(Category.objects.all().values_list("name", "name"))
+# except NameError:
+#     categories_list = []
+
+categories_list = [
+    ("bread", "bread"),
+    ("biscuits", "biscuits"),
+    ("cakes", "cakes"),
+    ("worldwide", "worldwide"),
+]
 
 
 class AddRecipeForm(forms.ModelForm):
