@@ -24,7 +24,7 @@ class Post(models.Model):
 
     header_image = models.ImageField(null=True, blank=True, upload_to="images/")
     slug = models.SlugField(max_length=200, unique=True)
-    category = models.CharField(max_length=255, choices=[], default="baking")
+    category = models.CharField(max_length=255, default="baking")
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = RichTextField(blank=True, null=True)
