@@ -7,14 +7,14 @@ from .models import Category, Post
 # except NameError:
 #     categories_list = []
 
+categories_list = [
+    ("baking", "baking"),
+    ("about me", "about me"),
+]
+
 
 class PostForm(forms.ModelForm):
     class Meta:
-        categories_list = [
-            ("baking", "baking"),
-            ("about me", "about me"),
-        ]
-
         model = Post
         fields = ("title", "title_tag", "author", "category", "snippet", "header_image", "body")
 
