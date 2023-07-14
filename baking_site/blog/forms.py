@@ -2,10 +2,16 @@ from django import forms
 
 from .models import Category, Post
 
-try:
-    categories_list = list(Category.objects.all().values_list("category_name", "category_name"))
-except NameError:
-    categories_list = []
+# try:
+#     categories_list = list(Category.objects.all().values_list("category_name", "category_name"))
+# except NameError:
+#     categories_list = []
+
+categories_list = [
+    ("baking", "baking"),
+    ("about me", "about me"),
+    ("coding", "coding"),
+]
 
 
 class PostForm(forms.ModelForm):
