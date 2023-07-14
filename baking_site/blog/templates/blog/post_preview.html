@@ -1,0 +1,30 @@
+{% if messages %}
+  <div class="card">
+    {% for message in messages %}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}<h3 class="card-header">{{ message }}</h3>{% endif %}
+      <div class="card-body">
+        <p class="card-text">
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            {% if 'safe' in message.tags %}
+              {{ message|safe }}
+            {% else %}
+              {{ message }}
+            {% endif %}
+          {% endif %}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+  {% comment %} <ul class="messages">
+    {% for message in messages %}
+      <li class="{{ message.tags }}">
+        {% if 'safe' in message.tags %}
+          {{ message|safe }}
+        {% else %}
+          {{ message }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul> {% endcomment %}
+{% endif %}
+</div>
