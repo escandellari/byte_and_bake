@@ -25,6 +25,9 @@
                 </div>
             {% empty %}
                 Nothing to show.
+                <a href="{% url 'recipes' %}">
+                    <button type="button" class="btn btn-primary">Back</button>
+                </a>
             {% endfor %}
         </div>
     </div>

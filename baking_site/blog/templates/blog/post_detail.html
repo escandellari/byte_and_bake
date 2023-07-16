@@ -10,7 +10,7 @@
   {{ post.category }}
   <br>
   <small>By:
-    {{ post.author }}
+    {{ post.author.first_name }}
     <br>
     {{ post.date_published }}
     {% if user.is_authenticated and user.id == post.author.id %}
