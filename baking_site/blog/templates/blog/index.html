@@ -5,27 +5,20 @@
   <h1>Welcome to my stream of consciousness</h1>
   <br>
   <div class="container">
-    <!-- Content here -->
     <div class="row">
-      <div class="col-5">
+      <div class="col cards">
         {% for post in object_list %}
-          <div class="card mb-3">
-            <div class="row align-items-center">
-              <div class="col-8">
-                <div class="card-body">
-                  <h4 class="card-title">{{ post.title }}</h4>
-                  <p class="card-text">{{ post.snippet | safe }}</p>
-                </div>
-              </div>
-              <div class="col-2">
-                <form action="{% url 'post_preview' post.pk %}" method="POST">
-                  {% csrf_token %}
-                  <button type="Submit"
-                          name="post_id"
-                          value="{{ post.id }}"
-                          class="btn btn-primary">Read</button>
-                </form>
-              </div>
+          <div class="card mb-2">
+            <div class="card-body">
+              <a class="card-title d-md-none" href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
+              <form action="{% url 'post_preview' post.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="Submit"
+                        name="post_id"
+                        value="{{ post.id }}"
+                        class="card-title btn btn-link d-none d-md-block">{{ post.title }}</button>
+              </form>
+              <p class="card-text">{{ post.snippet | safe }}</p>
             </div>
             <div class="card-footer">
               {{ post.author.first_name }} | {{ post.date_published }} | {{ post.category }}
@@ -37,7 +30,7 @@
           </div>
         {% endfor %}
       </div>
-      <div class="col">{% include "blog/post_preview.html" %}</div>
+      <div class="col d-none d-lg-block">{% include "blog/post_preview.html" %}</div>
     </div>
   </div>
 {% endblock content %}
