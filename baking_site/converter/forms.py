@@ -10,42 +10,52 @@ from .constants import CUPS_CHOICES, INGREDIENTS_WEIGHT_CHOICES
 
 
 class ConverterForm(forms.Form):
-    uk_ingredient = forms.ChoiceField(label="UK Ingredient", choices=INGREDIENTS_WEIGHT_CHOICES)
-    cups = forms.ChoiceField(label="Cups", choices=CUPS_CHOICES)
-    # yeast = forms.ChoiceField(label="Yeast", choices=YEAST_CHOICES)
-    # grams = forms.IntegerField()
+    uk_ingredient = forms.ChoiceField(
+        label="UK Ingredient",
+        choices=INGREDIENTS_WEIGHT_CHOICES,
+        widget=forms.Select(attrs={"class": "form-select"}),
+    )
+    cups = forms.ChoiceField(
+        label="Cups",
+        choices=CUPS_CHOICES,
+        widget=forms.Select(attrs={"class": "form-select"}),
+    )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper(self)
-        self.helper.form_action = reverse_lazy("converter")
-        self.helper.form_method = "POST"
-        self.helper.layout = Layout(
-            Div(
-                Div("uk_ingredient", css_class="form-group col-md-2 mb-0"),
-                Div("cups", css_class="form-group col-md-2 mb-0"),
-                Div(FormActions(Submit("save", "Convert"))),
-                Div(
-                    HTML("{% if submitted %} Conversion: {{ cups_to_grams }}g {% endif %}"),
-                    css_class="form-group col-md-2 mb-0",
-                ),
-            ),
-            # Row(
-            #     Column("uk_ingredient", css_class="form-group col-md-4 mb-0"),
-            #     Column("cups", css_class="form-group col-md-2 mb-0"),
-            #     Column(HTML("{% if submitted %}{{ cups_to_grams }}g{% endif %}"), css_class="form-group col-md-2 mb-0"),
-            #     # Column("grams", css_class="form-group col-md-4 mb-0"),
-            #     css_class="form-row",
-            # ),
-            # InlineField("uk_ingredient", css_class="form-group col-md-4 mb-0"),
-            # InlineField("cups", css_class="form-group col-md-2 mb-0"),
-            # InlineField(
-            #     HTML("{% if submitted %}{{ cups_to_grams }}g{% endif %}"), css_class="form-group col-md-2 mb-0"
-            # ),
-            # FormActions(
-            #     Submit("save", "Convert"),
-            # ),
-        )
+
+class TemperatureConversionForm(forms.Form):
+    # gas_mark = forms.ChoiceField(
+    #     choices=[(x, x) for x in range(1, 10)],
+    #     widget=forms.Select(attrs={"class": "form-select"}),
+    # )
+
+    temperature = forms.IntegerField(
+        label="Temperature",
+        widget=forms.TextInput(attrs={"class": "form-control"}),
+    )
+    conversion = forms.ChoiceField(
+        choices=[
+            ("gas_mark_f", "Gas Mark -> °Fahrenheit"),
+            ("gas_mark_c", "Gas Mark -> °Celsius"),
+            ("fahrenheit", "°Fahrenheit -> °Celsius"),
+            ("celsius", "°Celsius -> °Fahrenheit"),
+        ],
+        widget=forms.Select(attrs={"class": "form-select"}),
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        temperature = cleaned_data.get("temperature")
+        conversion = cleaned_data.get("conversion")
+
+        if conversion in ["gas_mark_f", "gas_mark_c"]:
+            if temperature not in range(1, 10):
+                # self.add_error("temperature", "Gas Mark chosen, please use 1 to 9")
+                raise forms.ValidationError({"temperature": "Gas Mark chosen, please use 1 to 9"})
+                # raise forms.ValidationError(
+                #     ("Invalid value: %(value)s"),
+                #     code="invalid",
+                #     params={"value": "42"},
+                # )
 
 
 class StudentForm(forms.Form):
