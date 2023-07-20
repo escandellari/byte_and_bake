@@ -4,9 +4,10 @@
   Converter
 {% endblock title %}
 {% block content %}
+  <br>
   <h1>CONVERTER</h1>
-  <h2>Cups to Grams Conversion Table</h2>
   <div class="form-group">
+    <h2>Cups to Grams Conversion Table</h2>
     <form class="row g-3" action="" method="POST">
       {% csrf_token %}
       <div class="col-md-3">
@@ -31,6 +32,7 @@
   </div>
   <hr>
   <div class="form-group">
+    <h2>Oven Temperature Conversion Table</h2>
     <form class="row g-3" action="" method="POST">
       {% csrf_token %}
       {% for field in temp_form %}

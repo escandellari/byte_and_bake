@@ -3,22 +3,23 @@
     Delete recipe
 {% endblock title %}
 {% block content %}
-    <div class="container">
-        {% if user.is_authenticated and user.id == post.author.id %}
-            <h1>Delete {{ post.title }}</h1>
-            <div class="form-group">
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    <strong>Are you sure?</strong>
-                    <br>
-                    <input type="submit" name="delete" value="Delete" class="btn btn-primary" />
-                    <a name="cancel"
-                       class="btn btn-primary"
-                       href="javascript:window.history.back()">Cancel</a>
-                </form>
-            </div>
-        {% else %}
-            <h1>Please login to delete post</h1>
-        {% endif %}
-    </div>
+    <br>
+    <h1>Delete Recipe</h1>
+    <br>
+    {% if user.is_authenticated and user.id == post.author.id %}
+        <h1>Delete {{ post.title }}</h1>
+        <div class="form-group">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <strong>Are you sure?</strong>
+                <br>
+                <input type="submit" name="delete" value="Delete" class="btn btn-primary" />
+                <a name="cancel"
+                   class="btn btn-primary"
+                   href="javascript:window.history.back()">Cancel</a>
+            </form>
+        </div>
+    {% else %}
+        <h1>Please login to delete recipe</h1>
+    {% endif %}
 {% endblock content %}

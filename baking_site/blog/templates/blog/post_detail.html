@@ -4,47 +4,22 @@
 {% endblock title %}
 {% block content %}
   <br>
-  <br>
   <h1>{{ post.title }}</h1>
-  <br>
   {{ post.category }}
   <br>
+  <br>
   <small>By:
-    {{ post.author.first_name }}
-    <br>
-    {{ post.date_published }}
+    {{ post.author.first_name }} | {{ post.date_published }}
     {% if user.is_authenticated and user.id == post.author.id %}
       <a href="{% url 'post_edit' post.slug %}">Edit</a> -
       <a href="{% url 'post_delete' post.slug %}">Delete</a>
     {% endif %}
   </small>
-  <br>
   <hr>
   {% if post.header_image %}<img src="{{ post.header_image.url }}">{% endif %}
-  <br>
-  <br>
   {{ post.body | safe }}
-  <br>
-  <br>
-  <br>
+  <hr>
   <a href="{% url 'blog_home' %}">
     <button type="button" class="btn btn-primary">Back</button>
   </a>
-  <br>
-  <br>
-  <hr>
-  <br>
-  {% comment %} {% if user.is_authenticated %}
-    <form action="{% url 'like_post' post.pk %}" method="POST">
-      {% csrf_token %}
-      {% if liked %}
-        <button type="Submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm">Unlike</button>
-      {% else %}
-        <button type="Submit" name="post_id" value="{{ post.id }}" class="btn btn-primary btn-sm">Like</button>
-      {% endif %}
-    {% else %}
-      <small><a href="{% url 'login' %}">Login</a> to Like</small>
-    {% endif %}
-  - {{ total_likes }} Like {% endcomment %}
-</form>
 {% endblock content %}

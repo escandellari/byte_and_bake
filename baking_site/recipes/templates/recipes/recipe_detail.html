@@ -4,61 +4,59 @@
   {{ object.title }}
 {% endblock title %}
 {% block content %}
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 card mb-4  mt-3 left  top">
-        <div class="card-body">
-          <h1>{{ object.title }}</h1>
-          <p class=" text-muted">
-            {{ object.author.first_name }} | {{ object.created_on }} | {{ object.category |title }}
-            {% if user.is_authenticated and user.id == post.author.id %}
-              |
-              <a href="{% url 'recipe_edit' object.slug %}">Edit</a>
-              |
-              <a href="{% url 'recipe_delete' object.slug %}">Delete</a>
-            {% endif %}
-          </p>
-          <table class="table">
-            <colgroup>
-              <col span="1" style="width: 35%;">
-              <col span="1" style="width: 65%;">
-            </colgroup>
-            <tr>
-              <td>
-                {% if object.image %}
-                  <img src="{{ object.image.url }}" style="width: 100%">
-                {% endif %}
-              </td>
-              <td>
-                <p>
-                  <strong>Preparation Time:</strong>
-                  {{ object.prep_time }}
-                </p>
-                <p>
-                  <strong>Cooking Time:</strong> {{ object.cook_time }}
-                </p>
-                <p>
-                  <strong>Proving Time:</strong> {{ object.proof_time }}
-                </p>
-                <p>
-                  <strong>Makes:</strong> {{ object.serves }}
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Ingredients:</strong>
-                <br>
-                {{ object.ingredients|safe }}
-              </td>
-              <td>
-                <strong>Method:</strong>
-                <br>
-                {{ object.method|safe }}
-              </td>
-            </tr>
-          </table>
-        </div>
+  <div class="row">
+    <div class="col-md-8 card mb-4  mt-3 left  top">
+      <div class="card-body">
+        <h1>{{ object.title }}</h1>
+        <p class=" text-muted">
+          {{ object.author.first_name }} | {{ object.created_on }} | {{ object.category |title }}
+          {% if user.is_authenticated and user.id == post.author.id %}
+            |
+            <a href="{% url 'recipe_edit' object.slug %}">Edit</a>
+            |
+            <a href="{% url 'recipe_delete' object.slug %}">Delete</a>
+          {% endif %}
+        </p>
+        <table class="table">
+          <colgroup>
+            <col span="1" style="width: 35%;">
+            <col span="1" style="width: 65%;">
+          </colgroup>
+          <tr>
+            <td>
+              {% if object.image %}
+                <img src="{{ object.image.url }}" style="width: 100%">
+              {% endif %}
+            </td>
+            <td>
+              <p>
+                <strong>Preparation Time:</strong>
+                {{ object.prep_time }}
+              </p>
+              <p>
+                <strong>Cooking Time:</strong> {{ object.cook_time }}
+              </p>
+              <p>
+                <strong>Proving Time:</strong> {{ object.proof_time }}
+              </p>
+              <p>
+                <strong>Makes:</strong> {{ object.serves }}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Ingredients:</strong>
+              <br>
+              {{ object.ingredients|safe }}
+            </td>
+            <td>
+              <strong>Method:</strong>
+              <br>
+              {{ object.method|safe }}
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

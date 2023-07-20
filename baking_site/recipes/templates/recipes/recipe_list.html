@@ -1,34 +1,33 @@
 {% load static %}
 {% block content %}
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-2 g-4 column-gap-3">
-            {% for post in recipe_list %}
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-5">
+    <div class="row row-cols-1 row-cols-md-2 g-0 row-gap-3 column-gap-3 ">
+        {% for post in recipe_list %}
+            <div class="card" style="max-width: 500px;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col mh-100">
                             {% if post.image %}<img src="{{ post.image.url }}" class="img-fluid rounded align-middle">{% endif %}
                         </div>
-                        <div class="col-md-7">
-                            <div class="card-body">
-                                <h2 class="card-title">{{ post.title }}</h2>
-                                <p class="card-text text-muted h6">{{ post.author.first_name }} | {{ post.created_on }}</p>
-                                <p class="card-text">{{ post.snippet| slice:150 |safe }}</p>
-                                <a href="{% url 'recipe_detail' post.slug %}" class="btn btn-primary">Read More &rarr;</a>
-                                {% if user.is_authenticated and user.id == post.author.id %}
-                                    <br>
-                                    <a href="{% url 'recipe_edit' post.slug %}">Edit</a>
-                                    <a href="{% url 'recipe_delete' post.slug %}">Delete</a>
-                                {% endif %}
-                            </div>
+                        <div class="col">
+                            <h2 class="card-title">{{ post.title }}</h2>
+                            <p class="card-text">{{ post.snippet| slice:150 |safe }}</p>
+                            <a href="{% url 'recipe_detail' post.slug %}" class="btn btn-primary">Read More &rarr;</a>
                         </div>
                     </div>
                 </div>
-            {% empty %}
-                Nothing to show.
-                <a href="{% url 'recipes' %}">
-                    <button type="button" class="btn btn-primary">Back</button>
-                </a>
-            {% endfor %}
-        </div>
+                <div class="card-footer">
+                    {{ post.author.first_name }} | {{ post.created_on }} | {{ post.category }}
+                    {% if user.is_authenticated and user.id == post.author.id %}
+                        | <a href="{% url 'recipe_edit' post.slug %}">Edit</a>
+                        | <a href="{% url 'recipe_delete' post.slug %}">Delete</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% empty %}
+            Coming soon!!
+            <a href="{% url 'recipes' %}">
+                <button type="button" class="btn btn-primary">Back</button>
+            </a>
+        {% endfor %}
     </div>
 {% endblock content %}

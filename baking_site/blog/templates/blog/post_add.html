@@ -3,10 +3,10 @@
   Create a new post
 {% endblock title %}
 {% block content %}
+  <br>
+  <h1>Add post</h1>
+  <br>
   {% if user.is_authenticated %}
-    <h1>Add post</h1>
-    <br>
-    <br>
     <div class="mb-3">
       <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -21,10 +21,6 @@
       document.getElementById("author").value = name;
     </script>
   {% else %}
-    <br>
-    <br>
     <h1>Please login to add post</h1>
-    <br>
-    <br>
   {% endif %}
 {% endblock content %}
