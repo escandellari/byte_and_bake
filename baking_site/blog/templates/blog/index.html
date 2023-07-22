@@ -12,15 +12,20 @@
       {% for post in object_list %}
         <div class="card mb-2">
           <div class="card-body">
-            <a class="card-title d-md-none" href="{% url 'post_detail' post.slug %}">{{ post.title }}</a>
+            <a class="card-title text-decoration-none btn btn-link d-md-none"
+               href="{% url 'post_detail' post.slug %}">
+              <h3>{{ post.title }}</h3>
+            </a>
             <form action="{% url 'post_preview' post.pk %}" method="POST">
               {% csrf_token %}
-              <button type="Submit"
+              <button type="submit"
                       name="post_id"
                       value="{{ post.id }}"
-                      class="card-title btn btn-link d-none d-md-block">{{ post.title }}</button>
+                      class="btn btn-link text-decoration-none d-none d-md-block">
+                <h3>{{ post.title }}</h3>
+              </button>
             </form>
-            <p class="card-text">{{ post.snippet | safe }}</p>
+            <p class="card-text ps-3">{{ post.snippet | safe }}</p>
           </div>
           <div class="card-footer">
             {{ post.author.first_name }} | {{ post.date_published }} | {{ post.category }}

@@ -1,18 +1,21 @@
 {% if messages %}
   <div class="card">
     {% for message in messages %}
-      {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}<h3 class="card-header">{{ message }}</h3>{% endif %}
-      <div class="card-body">
-        <p class="card-text">
-          {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-            {% if 'safe' in message.tags %}
-              {{ message|safe }}
-            {% else %}
-              {{ message }}
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+        <h3 class="card-header">{{ message }}</h3>
+      {% else %}
+        <div class="card-body">
+          <p class="card-text">
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+              {% if 'safe' in message.tags %}
+                {{ message|safe }}
+              {% else %}
+                {{ message }}
+              {% endif %}
             {% endif %}
-          {% endif %}
-        </p>
-      </div>
+          </p>
+        </div>
+      {% endif %}
     {% endfor %}
   </div>
 {% endif %}
