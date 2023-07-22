@@ -15,13 +15,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
-                    {{ post.author.first_name }} | {{ post.created_on }} | {{ post.category }}
-                    {% if user.is_authenticated and user.id == post.author.id %}
-                        | <a href="{% url 'recipe_edit' post.slug %}">Edit</a>
-                        | <a href="{% url 'recipe_delete' post.slug %}">Delete</a>
-                    {% endif %}
-                </div>
+                <div class="card-footer">{{ post.author.first_name }} | {{ post.date_published }} | {{ post.category | title }}</div>
             </div>
         {% empty %}
             Coming soon!!
