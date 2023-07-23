@@ -23,6 +23,9 @@ def recipe_add_view(request):
         if recipe_form.is_valid():
             recipe = recipe_form.save()
             return redirect(reverse("recipe_detail", kwargs={"slug": recipe.slug}))
+        else:
+            print(recipe_form.errors.as_data())
+            print("***********************")
     else:
         context = {"recipe_form": recipe_form}
         return render(request, "recipes/recipe_add.html", context=context)
@@ -35,7 +38,7 @@ class EditRecipeView(UpdateView):
 
     def post(self, request, *args, **kwargs):
         if "cancel" in request.POST:
-            url = reverse_lazy("recipe_detail")
+            url = reverse("recipe_detail", kwargs={"slug": self.kwargs["slug"]})
             return HttpResponseRedirect(url)
         else:
             return super(EditRecipeView, self).post(request, *args, **kwargs)

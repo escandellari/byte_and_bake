@@ -6,11 +6,12 @@ from .models import Category, Recipe
 class RecipeAdmin(admin.ModelAdmin):
     list_display = (
         "title",
+        "snippet",
         "slug",
+        "author",
         "created_on",
-        "prep_time",
     )
-    search_fields = ["title", "content", "serves"]
+    search_fields = ["title", "content", "category"]
     prepopulated_fields = {"slug": ("title",)}
 
 

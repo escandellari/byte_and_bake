@@ -44,8 +44,9 @@ class Recipe(models.Model):
 
     ingredients = RichTextField(blank=True, null=True)
     method = RichTextField(blank=True, null=True)
+    story_time = RichTextField(blank=True, null=True, default="")
 
-    created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField(auto_now=True, null=True)
 
     class Meta:
         ordering = ["-created_on"]

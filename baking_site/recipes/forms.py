@@ -23,6 +23,7 @@ class AddRecipeForm(forms.ModelForm):
             "serves",
             "ingredients",
             "method",
+            "story_time",
         )
 
         widgets = {
@@ -35,6 +36,7 @@ class AddRecipeForm(forms.ModelForm):
             "serves": forms.TextInput(attrs={"class": "form-control"}),
             "ingredients": forms.Textarea(attrs={"class": "form-control"}),
             "method": forms.Textarea(attrs={"class": "form-control"}),
+            "story_time": forms.Textarea(attrs={"class": "form-control"}),
             "snippet": forms.TextInput(attrs={"class": "form-control"}),
         }
 
@@ -82,6 +84,7 @@ class EditRecipeForm(forms.ModelForm):
             "category",
             "snippet",
             "image",
+            "story_time",
             "prep_time",
             "cook_time",
             "proof_time",
@@ -100,4 +103,5 @@ class EditRecipeForm(forms.ModelForm):
             "serves": forms.TextInput(attrs={"class": "form-control"}),
             "ingredients": forms.Textarea(attrs={"class": "form-control"}),
             "method": forms.Textarea(attrs={"class": "form-control"}),
+            "story_time": forms.Textarea(attrs={"class": "form-control"}),
         }
