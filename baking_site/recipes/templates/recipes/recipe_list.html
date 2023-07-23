@@ -15,7 +15,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">{{ post.author.first_name }} | {{ post.date_published }} | {{ post.category | title }}</div>
+                <div class="card-footer">{{ post.author.first_name }} | {{ post.created_on }} | {{ post.category | title }}</div>
             </div>
         {% empty %}
             Coming soon!!

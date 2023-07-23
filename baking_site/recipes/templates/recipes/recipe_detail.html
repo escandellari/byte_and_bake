@@ -6,7 +6,7 @@
 {% block content %}
   <h1>{{ object.title }}</h1>
   <p class=" text-muted">
-    {{ object.author.first_name }} | {{ object.date_published }} | {{ object.category |title }}
+    {{ object.author.first_name }} | {{ object.created_on }} | {{ object.category |title }}
     {% if user.is_authenticated and user.id == object.author.id %}
       |
       <a href="{% url 'recipe_edit' object.slug %}">Edit</a>
