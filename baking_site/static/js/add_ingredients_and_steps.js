@@ -41,3 +41,8 @@ function addValue(table, element_id) {
   newElem.setAttribute("onclick", "SomeDeleteRowFunction(this)");
   newCell.appendChild(newElem);
 }
+
+window.SomeDeleteRowFunction = function SomeDeleteRowFunction(o) {
+  var p = o.parentNode.parentNode;
+  p.parentNode.removeChild(p);
+};
