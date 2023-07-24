@@ -21,7 +21,10 @@ def recipe_add_view(request):
     if request.method == "POST":
         recipe_form = AddRecipeForm(request.POST, request.FILES)
         if recipe_form.is_valid():
-            recipe = recipe_form.save()
+            recipe = recipe_form.save(commit=False)
+            recipe.ingredients = request.POST.get("ingredients")
+            recipe.method = request.POST.get("steps")
+            recipe.save()
             return redirect(reverse("recipe_detail", kwargs={"slug": recipe.slug}))
         else:
             print(recipe_form.errors.as_data())

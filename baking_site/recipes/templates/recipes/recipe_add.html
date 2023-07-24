@@ -1,11 +1,17 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
+  <script type="text/javascript"
+          src="{% static 'js/add_ingredients_and_steps.js' %}"></script>
   <br>
   <h1>Add recipe</h1>
   <br>
   {% if user.is_authenticated %}
     <div class="form-group">
-      <form class="row g-3" action="" method="POST" enctype="multipart/form-data">
+      <form class="row g-3"
+            method="POST"
+            enctype="multipart/form-data"
+            onsubmit="return getAllData()">
         {% csrf_token %}
         {{ recipe_form.media }}
         <div class="col-md-4">
@@ -51,16 +57,54 @@
           {{ recipe_form.story_time }}
         </div>
         <div class="col-md-12">
-          <label for="ingredients" class="form-label">Ingredients:</label>
-          <br>
-          {{ recipe_form.ingredients }}
+          <div class="row g-1">
+            <div class="col">
+              <div class="row g-1">
+                <label for="id_ingredient" class="form-label">Add Ingredient:</label>
+                <div class="col">
+                  <input id="ingredient" class="form-control" type="text" name="ingredient" />
+                </div>
+                <div class="col">
+                  <input class="btn btn-primary"
+                         value="Add another ingredient"
+                         onclick="addValue('ingredientTbl', 'ingredient');" />
+                </div>
+              </div>
+              <br>
+              <table id="ingredientTbl">
+                <tbody>
+                  <tr>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col">
+              <div class="row g-1">
+                <label for="id_steps" class="form-label">Add Step:</label>
+                <div class="col">
+                  <input id="steps" class="form-control" type="text" name="steps" />
+                </div>
+                <div class="col">
+                  <input class="btn btn-primary"
+                         value="Add another step"
+                         onclick="addValue('stepsTbl', 'steps');" />
+                </div>
+              </div>
+              <br>
+              <table id="stepsTbl">
+                <tbody>
+                  <tr>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <div class="col-md-12">
-          <label for="method" class="form-label">Method:</label>
-          <br>
-          {{ recipe_form.method }}
-        </div>
-        <button class="btn btn-primary">Add</button>
+        <input type="hidden" id="final_ingredients" name="ingredients" />
+        <input type="hidden" id="final_steps" name="steps" />
+        <button class="form-control btn btn-primary">Add</button>
       </form>
       <script>
       var name = "{{ user.id }}";
