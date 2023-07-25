@@ -19,23 +19,13 @@ class Category(models.Model):
 
 
 class Recipe(models.Model):
-    # list(Category.objects.all().values_list("name", "name"))
-    category_choices = [
-        ("bread", "bread"),
-        ("biscuits", "biscuits"),
-        ("cakes", "cakes"),
-        ("worldwide", "worldwide"),
-    ]
-
     title = models.CharField(max_length=200, unique=True)
     snippet = models.CharField(max_length=150, blank=True, null=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipe_posts")
 
     image = models.ImageField(null=True, blank=True, upload_to="images/")
-    category = models.CharField(
-        max_length=150, choices=category_choices, blank=True, null=True, default="uncategorised"
-    )
+    category = models.CharField(max_length=150, blank=True, null=True, default="uncategorised")
 
     prep_time = models.CharField(max_length=200, blank=True, null=True)
     cook_time = models.CharField(max_length=200, blank=True, null=True)
