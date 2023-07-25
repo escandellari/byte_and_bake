@@ -9,9 +9,10 @@ class RecipeAdmin(admin.ModelAdmin):
         "snippet",
         "slug",
         "author",
+        "category",
         "created_on",
     )
-    search_fields = ["title", "content", "category"]
+    search_fields = ("title", "author", "category")
     prepopulated_fields = {"slug": ("title",)}
 
 
