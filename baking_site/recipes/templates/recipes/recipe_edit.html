@@ -3,22 +3,24 @@
   Edit recipe
 {% endblock title %}
 {% block content %}
-  {% if user.is_authenticated and user.id == object.author.id %}
-    <h1>Edit "{{ object.title }}"</h1>
-    <div class="form-group">
-      <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        {{ form.media }}
-        <input type="submit" name="update" value="Update" class="btn btn-primary" />
-        <input type="submit"
-               name="cancel"
-               value="Cancel"
-               class="btn btn-primary"
-               onclick="javascript:history.back();" />
-      </form>
-    </div>
-  {% else %}
-    <h1>Please login to edit recipe</h1>
-  {% endif %}
+  <div class="container">
+    {% if user.is_authenticated and user.id == object.author.id %}
+      <h1>Edit "{{ object.title }}"</h1>
+      <div class="form-group">
+        <form action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {{ form.media }}
+          <input type="submit" name="update" value="Update" class="btn btn-primary" />
+          <input type="submit"
+                 name="cancel"
+                 value="Cancel"
+                 class="btn btn-primary"
+                 onclick="javascript:history.back();" />
+        </form>
+      </div>
+    {% else %}
+      <h1>Please login to edit recipe</h1>
+    {% endif %}
+  </div>
 {% endblock %}

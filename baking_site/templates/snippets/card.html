@@ -1,0 +1,25 @@
+<div class="card" style="max-width: 500px;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col mh-100">
+                {% if post.image %}<img src="{{ post.image.url }}" class="img-fluid rounded align-middle">{% endif %}
+            </div>
+            <div class="col">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <p class="card-text">{{ post.snippet| slice:150 |safe }}</p>
+                <a href="{% url 'recipe_detail' post.slug %}" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        {{ post.author.first_name }} | {{ post.date_published }} |
+        {% for category in post.category.all %}
+            <a href="{% url 'category' category %}">{{ category.name | title }}</a>
+            {% if not forloop.last %}|{% endif %}
+        {% endfor %}
+        {% if user.is_authenticated and user.id == post.author.id %}
+            | <a href="{% url 'recipe_edit' post.slug %}">Edit</a>
+            | <a href="{% url 'recipe_delete' post.slug %}">Delete</a>
+        {% endif %}
+    </div>
+</div>

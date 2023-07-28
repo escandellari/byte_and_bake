@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-  <script type="text/javascript"
-          src="{% static 'js/add_ingredients_and_steps.js' %}"></script>
   <br>
   <h1>Add recipe</h1>
   <br>
@@ -27,32 +25,32 @@
           {{ recipe_form.author }}
         </div>
         <div class="col-md-3">
-          <label for="category" class="form-label">Category:</label>
+          <label for="id_category" class="form-label">Category:</label>
           {{ recipe_form.category }}
         </div>
         <div class="col-md-3">
-          <label for="prep_time" class="form-label">Prep Time:</label>
+          <label for="id_prep_time" class="form-label">Prep Time:</label>
           {{ recipe_form.prep_time }}
         </div>
         <div class="col-md-3">
-          <label for="cook_time" class="form-label">Cook Time:</label>
+          <label for="id_cook_time" class="form-label">Cook Time:</label>
           {{ recipe_form.cook_time }}
         </div>
         <div class="col-md-3">
-          <label for="proof_time" class="form-label">Proof Time:</label>
+          <label for="id_proof_time" class="form-label">Proof Time:</label>
           {{ recipe_form.proof_time }}
         </div>
         <div class="col-md-3">
-          <label for="serves" class="form-label">Serves:</label>
+          <label for="id_serves" class="form-label">Serves:</label>
           {{ recipe_form.serves }}
         </div>
         <div class="col-md-4">
-          <label for="image" class="form-label">Image:</label>
+          <label for="id_image" class="form-label">Image:</label>
           <br>
           {{ recipe_form.image }}
         </div>
         <div class="col-md-12">
-          <label for="story_time" class="form-label">Story:</label>
+          <label for="id_story_time" class="form-label">Story:</label>
           <br>
           {{ recipe_form.story_time }}
         </div>

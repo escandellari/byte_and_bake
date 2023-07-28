@@ -4,73 +4,79 @@
   {{ object.title }}
 {% endblock title %}
 {% block content %}
-  <h1>{{ object.title }}</h1>
-  <p class=" text-muted">
-    {{ object.author.first_name }} | {{ object.created_on }} | {{ object.category |title }}
-    {% if user.is_authenticated and user.id == object.author.id %}
-      |
-      <a href="{% url 'recipe_edit' object.slug %}">Edit</a>
-      |
-      <a href="{% url 'recipe_delete' object.slug %}">Delete</a>
-    {% endif %}
-  </p>
-  <div class="row">
-    {% if object.story_time %}
-      <div class="card">
-        <div class="card-body">
-          <p class="card-text">{{ object.story_time|safe }}</p>
+  <div class="container">
+    <h1>{{ object.title }}</h1>
+    <p class=" text-muted">
+      {{ object.author.first_name }} | {{ object.date_published }} |
+      {% for category in object.category.all %}
+        {{ category.name | title }}
+        {% if not forloop.last %}|{% endif %}
+      {% endfor %}
+      {% if user.is_authenticated and user.id == object.author.id %}
+        |
+        <a href="{% url 'recipe_edit' object.slug %}">Edit</a>
+        |
+        <a href="{% url 'recipe_delete' object.slug %}">Delete</a>
+      {% endif %}
+    </p>
+    <div class="row">
+      {% if object.story_time %}
+        <div class="card">
+          <div class="card-body">
+            <p class="card-text">{{ object.story_time|safe }}</p>
+          </div>
         </div>
-      </div>
-    {% endif %}
-    <div class="card mb-4 mt-3 left top">
-      <div class="card-body">
-        <div style="position: relative">
-          <div class="row">
-            <div style="width: 50%;">
-              {% if object.image %}
-                <img src="{{ object.image.url }}" style="width: 100%">
-              {% endif %}
-            </div>
-            <div style="width: 50%;">
-              <p>
-                {% comment %} <img src="{% static 'icon/003-apron.png' %}"
-                     style="font-size:36px;
-                            color:black"> {% endcomment %}
-                <strong>&emsp;Preparation Time:</strong>
-                {{ object.prep_time }}
-              </p>
-              <p>
-                {% comment %} <img src="{% static 'icon/001-meal.png' %}"
-                     style="font-size:36px;
-                            color:black"> {% endcomment %}
-                <strong>&emsp;Cooking Time:</strong> {{ object.cook_time }}
-              </p>
-              <p>
-                {% comment %} <img src="{% static 'icon/004-stopwatch.png' %}"
-                     style="font-size:36px;
-                            color:black"> {% endcomment %}
-                <strong>&emsp;Proving Time:</strong> {{ object.proof_time }}
-              </p>
-              <p>
-                {% comment %} <img src="{% static 'icon/002-cloche.png' %}"
-                     style="font-size:36px;
-                            color:black"> {% endcomment %}
-                <strong>&emsp;Makes:</strong> {{ object.serves }}
-              </p>
-            </div>
-            <div style="width: 35%;">
-              <br>
-              <h2>
-                <strong>Ingredients:</strong>
-              </h2>
-              {{ object.ingredients|safe }}
-            </div>
-            <div style="width: 65%;">
-              <br>
-              <h2>
-                <strong>Method:</strong>
-              </h2>
-              {{ object.method|safe }}
+      {% endif %}
+      <div class="card mb-4 mt-3 left top">
+        <div class="card-body">
+          <div style="position: relative">
+            <div class="row">
+              <div style="width: 50%;">
+                {% if object.image %}
+                  <img src="{{ object.image.url }}" style="width: 100%">
+                {% endif %}
+              </div>
+              <div style="width: 50%;">
+                <p>
+                  {% comment %} <img src="{% static 'icon/003-apron.png' %}"
+      style="font-size:36px;
+             color:black"> {% endcomment %}
+                  <strong>&emsp;Preparation Time:</strong>
+                  {{ object.prep_time }}
+                </p>
+                <p>
+                  {% comment %} <img src="{% static 'icon/001-meal.png' %}"
+      style="font-size:36px;
+             color:black"> {% endcomment %}
+                  <strong>&emsp;Cooking Time:</strong> {{ object.cook_time }}
+                </p>
+                <p>
+                  {% comment %} <img src="{% static 'icon/004-stopwatch.png' %}"
+      style="font-size:36px;
+             color:black"> {% endcomment %}
+                  <strong>&emsp;Proving Time:</strong> {{ object.proof_time }}
+                </p>
+                <p>
+                  {% comment %} <img src="{% static 'icon/002-cloche.png' %}"
+      style="font-size:36px;
+             color:black"> {% endcomment %}
+                  <strong>&emsp;Makes:</strong> {{ object.serves }}
+                </p>
+              </div>
+              <div style="width: 45%;">
+                <br>
+                <h4>
+                  <strong>Ingredients:</strong>
+                </h4>
+                {{ object.ingredients|safe }}
+              </div>
+              <div style="width: 55%;">
+                <br>
+                <h4>
+                  <strong>Method:</strong>
+                </h4>
+                {{ object.method|safe }}
+              </div>
             </div>
           </div>
         </div>
