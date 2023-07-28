@@ -36,6 +36,10 @@ body {
   clear: both;
 }
 
+.card-footer {
+  background-color: #f4eeee;
+}
+
 a:link {
   text-decoration: none;
 }
