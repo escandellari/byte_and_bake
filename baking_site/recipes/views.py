@@ -1,18 +1,27 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render, reverse
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, UpdateView
 
 from .forms import AddRecipeForm, EditRecipeForm
-from .models import Recipe
+from .models import Category, Recipe
 
 
 def recipes_view(request):
-    return render(request, "recipes/index.html")
+    recipe_list = Recipe.objects.all()
+    return render(
+        request,
+        "recipes/recipe_index.html",
+        {
+            "recipe_list": recipe_list,
+        },
+    )
 
 
 def category_view(request, name):
-    recipe_list = Recipe.objects.filter(category=name)
+    category = Category.objects.get(name=name)
+    recipe_list = Recipe.objects.filter(category=category.id)
+
     return render(request, "recipes/category.html", {"recipe_list": recipe_list, "category_name": name})
 
 
@@ -25,6 +34,7 @@ def recipe_add_view(request):
             recipe.ingredients = request.POST.get("ingredients")
             recipe.method = request.POST.get("steps")
             recipe.save()
+            recipe_form.save_m2m()
             return redirect(reverse("recipe_detail", kwargs={"slug": recipe.slug}))
         else:
             print(recipe_form.errors.as_data())
@@ -55,3 +65,10 @@ class DeleteRecipeView(DeleteView):
     def post(self, request, *args, **kwargs):
         if not "cancel" in request.POST:
             return super(DeleteRecipeView, self).post(request, *args, **kwargs)
+
+
+class AddCategoryView(CreateView):
+    model = Category
+    template_name = "recipes/category_add.html"
+    fields = "__all__"
+    success_url = reverse_lazy("category_add")
