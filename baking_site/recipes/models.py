@@ -23,9 +23,9 @@ class Recipe(models.Model):
     snippet = models.CharField(max_length=150, blank=True, null=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="recipe_posts")
+    category = models.ManyToManyField("Category", related_name="recipes")
 
     image = models.ImageField(null=True, blank=True, upload_to="images/")
-    category = models.CharField(max_length=150, blank=True, null=True, default="uncategorised")
 
     prep_time = models.CharField(max_length=200, blank=True, null=True)
     cook_time = models.CharField(max_length=200, blank=True, null=True)
@@ -36,10 +36,10 @@ class Recipe(models.Model):
     method = RichTextField(blank=True, null=True)
     story_time = RichTextField(blank=True, null=True, default="")
 
-    created_on = models.DateTimeField(auto_now=True, null=True)
+    date_published = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["-created_on"]
+        ordering = ["-date_published"]
 
     def __str__(self):
         return self.title + " | " + str(self.author)
