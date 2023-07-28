@@ -29,7 +29,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body = RichTextField(blank=True, null=True)
     snippet = models.CharField(max_length=150)
-    date_published = models.DateField(auto_now_add=True)
+    date_published = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ["-date_published"]
