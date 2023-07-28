@@ -18,6 +18,8 @@
     <script src="https://kit.fontawesome.com/9edf1652d4.js"
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="{% static 'js/add_ingredients_and_steps.js' %}"></script>
     <title>
       {% block title %}
       {% endblock title %}
@@ -78,8 +80,23 @@
               <a class="nav-link" href="{% url 'converter' %}">Converter</a>
             </li>
             {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'post_add' %}">Add Post</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"
+                   href="#"
+                   role="button"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false">Add</a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'post_add' %}">Add Post</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'recipe_add' %}">Add Recipe</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'category_add' %}">Add Category</a>
+                  </li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'recipe_add' %}"><i class="fa-solid fa-file-circle-plus"></i></a>
