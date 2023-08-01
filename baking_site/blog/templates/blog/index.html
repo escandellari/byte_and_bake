@@ -4,39 +4,41 @@
   Blog posts
 {% endblock title %}
 {% block content %}
-  <br>
-  <h1>Welcome to my stream of consciousness</h1>
-  <br>
-  <div class="row">
-    <div class="col cards">
-      {% for post in object_list %}
-        <div class="card mb-2">
-          <div class="card-body">
-            <a class="card-title text-decoration-none btn btn-link d-md-none"
-               href="{% url 'post_detail' post.slug %}">
-              <h3>{{ post.title }}</h3>
-            </a>
-            <form action="{% url 'post_preview' post.pk %}" method="POST">
-              {% csrf_token %}
-              <button type="submit"
-                      name="post_id"
-                      value="{{ post.id }}"
-                      class="btn btn-link text-decoration-none d-none d-md-block">
+  <div class="container">
+    <br>
+    <h1 class="text-center">Welcome to my stream of consciousness</h1>
+    <br>
+    <div class="row">
+      <div class="col cards">
+        {% for post in object_list %}
+          <div class="card mb-2">
+            <div class="card-body">
+              <a class="card-title text-decoration-none btn btn-link d-md-none"
+                 href="{% url 'post_detail' post.slug %}">
                 <h3>{{ post.title }}</h3>
-              </button>
-            </form>
-            <p class="card-text ps-3">{{ post.snippet | safe }}</p>
+              </a>
+              <form action="{% url 'post_preview' post.pk %}" method="POST">
+                {% csrf_token %}
+                <button type="submit"
+                        name="post_id"
+                        value="{{ post.id }}"
+                        class="btn btn-link text-decoration-none d-none d-md-block">
+                  <h3>{{ post.title }}</h3>
+                </button>
+              </form>
+              <p class="card-text ps-3">{{ post.snippet | safe }}</p>
+            </div>
+            <div class="card-footer">
+              {{ post.author.first_name }} | {{ post.date_published }} | {{ post.category }}
+              {% if user.is_authenticated and user.id == post.author.id %}
+                | <a href="{% url 'post_edit' post.slug %}">Edit</a>
+                | <a href="{% url 'post_delete' post.slug %}">Delete</a>
+              {% endif %}
+            </div>
           </div>
-          <div class="card-footer">
-            {{ post.author.first_name }} | {{ post.date_published }} | {{ post.category }}
-            {% if user.is_authenticated and user.id == post.author.id %}
-              | <a href="{% url 'post_edit' post.slug %}">Edit</a>
-              | <a href="{% url 'post_delete' post.slug %}">Delete</a>
-            {% endif %}
-          </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
+      <div class="col d-none d-lg-block">{% include "blog/post_preview.html" %}</div>
     </div>
-    <div class="col d-none d-lg-block">{% include "blog/post_preview.html" %}</div>
   </div>
 {% endblock content %}

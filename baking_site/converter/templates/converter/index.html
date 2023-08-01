@@ -4,61 +4,63 @@
   Converter
 {% endblock title %}
 {% block content %}
-  <br>
-  <h1>CONVERTER</h1>
-  <div class="form-group">
-    <h2>Cups to Grams Conversion Table</h2>
-    <form class="row g-3" action="" method="POST">
-      {% csrf_token %}
-      <div class="col-md-3">
-        <label for="id_uk_ingredient" class="form-label">Ingredient:</label>
-        {{ converter_form.uk_ingredient }}
-      </div>
-      <div class="col-md-3">
-        <label for="id_cups" class="form-label">Cups:</label>
-        {{ converter_form.cups }}
-      </div>
-      <div class="col-md-1 align-self-end ml-auto">
-        <input type="submit" name="ingredient_converter" class="btn btn-primary">
-      </div>
-      <div class="col-md-3">
-        {% if submitted %}
-          <label for="id_cups_to_grams" class="form-label">Conversion:</label>
-          <br>
-          {{ cups_to_grams }} g
-        {% endif %}
-      </div>
-    </form>
-  </div>
-  <hr>
-  <div class="form-group">
-    <h2>Oven Temperature Conversion Table</h2>
-    <form class="row g-3" action="" method="POST">
-      {% csrf_token %}
-      {% for field in temp_form %}
+  <div class="container">
+    <h1>CONVERTER</h1>
+    <br>
+    <div class="form-group">
+      <h4>Cups to Grams Conversion Table</h4>
+      <form class="row g-3" action="" method="POST">
+        {% csrf_token %}
         <div class="col-md-3">
-          <div class="fieldWrapper">
-            {{ field.label_tag }} {{ field }}
-            {% if field.help_text %}
-              <p class="help" id="{{ field.id_for_label }}_helptext">{{ field.help_text|safe }}</p>
-            {% endif %}
-            {{ field.errors }}
-          </div>
+          <label for="id_uk_ingredient" class="form-label">Ingredient:</label>
+          {{ converter_form.uk_ingredient }}
         </div>
-      {% endfor %}
-      <div class="col-md-1 align-self-center ml-auto">
-        <input type="submit" name="temperature_converter" class="btn btn-primary">
-      </div>
-      <div class="col-md-3">
-        {% if submitted_temp %}
-          <label for="id_cups_to_grams" class="form-label">Converted Temperature:</label>
-          <br>
-          {{ converted_temp }}
-        {% endif %}
-      </div>
-    </form>
+        <div class="col-md-3">
+          <label for="id_cups" class="form-label">Cups:</label>
+          {{ converter_form.cups }}
+        </div>
+        <div class="col-md-1 align-self-end ml-auto">
+          <input type="submit" name="ingredient_converter" class="btn btn-primary">
+        </div>
+        <div class="col-md-3">
+          {% if submitted %}
+            <label for="id_cups_to_grams" class="form-label">Conversion:</label>
+            <br>
+            {{ cups_to_grams }} g
+          {% endif %}
+        </div>
+      </form>
+    </div>
+    <hr>
+    <div class="form-group">
+      <h4>Oven Temperature Conversion Table</h4>
+      <form class="row g-3" action="" method="POST">
+        {% csrf_token %}
+        {% for field in temp_form %}
+          <div class="col-md-3">
+            <div class="fieldWrapper">
+              {{ field.label_tag }} {{ field }}
+              {% if field.help_text %}
+                <p class="help" id="{{ field.id_for_label }}_helptext">{{ field.help_text|safe }}</p>
+              {% endif %}
+              {{ field.errors }}
+            </div>
+          </div>
+        {% endfor %}
+        <div class="col-md-1 align-self-center ml-auto">
+          <input type="submit" name="temperature_converter" class="btn btn-primary">
+        </div>
+        <div class="col-md-3">
+          {% if submitted_temp %}
+            <label for="id_cups_to_grams" class="form-label">Converted Temperature:</label>
+            <br>
+            {{ converted_temp }}
+          {% endif %}
+        </div>
+      </form>
+    </div>
+    <hr>
   </div>
-  <hr>
   {% comment %} <form action="" method="post">
     {% csrf_token %}
     {{ temp_form | crispy }}
