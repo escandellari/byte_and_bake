@@ -4,17 +4,12 @@
     Recipes
 {% endblock title %}
 {% block content %}
-    <div class="jumbotron jumbotron-fluid crf-hero d-flex">
+    <div class="jumbotron jumbotron-fluid crf-hero d-flex"
+         style="background-image: url({{ banner }})">
         <div class="container d-flex flex-column justify-content-top align-items-sm-stretch align-items-md-center">
-            <h1 class="col-sm-12">All the Recipes</h1>
+            <h1 class="col-sm-12">{{ category_name | title }}</h1>
         </div>
     </div>
     <hr>
-    <div class="row justify-content-center row-cols-1 row-cols-md-3 g-0 row-gap-2 column-gap-2 ">
-        {% for post in recipe_list %}
-            {% include "snippets/card.html" with post=post %}
-        {% empty %}
-            Coming soon!!
-        {% endfor %}
-    </div>
+    {% include "recipes/recipe_list.html" %}
 {% endblock content %}

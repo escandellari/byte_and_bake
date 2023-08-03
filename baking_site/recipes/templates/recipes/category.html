@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% block title %}
-    {{ category_name | title }}
-{% endblock title %}
-{% block content %}
-    <h1 class="text-center py-3">{{ category_name | title }}</h1>
-    <hr>
-    {% include "recipes/recipe_list.html" %}
-{% endblock content %}

@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, reverse
+from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, UpdateView
 
@@ -9,11 +10,15 @@ from .models import Category, Recipe
 
 def recipes_view(request):
     recipe_list = Recipe.objects.all()
+    banner = static("img/all_recipes_banner.png")
+
     return render(
         request,
         "recipes/recipe_index.html",
         {
             "recipe_list": recipe_list,
+            "category_name": "All the Recipes",
+            "banner": banner,
         },
     )
 
@@ -21,8 +26,17 @@ def recipes_view(request):
 def category_view(request, name):
     category = Category.objects.get(name=name)
     recipe_list = Recipe.objects.filter(category=category.id)
+    banner = static("img/" + category.name + "_banner.png")
 
-    return render(request, "recipes/category.html", {"recipe_list": recipe_list, "category_name": name})
+    return render(
+        request,
+        "recipes/recipe_index.html",
+        {
+            "recipe_list": recipe_list,
+            "category_name": name,
+            "banner": banner,
+        },
+    )
 
 
 def recipe_add_view(request):

@@ -114,10 +114,8 @@ ul.no-bullets {
 
 /* HERO */
 .crf-hero {
-  background-image: url("../img/all_recipes_banner.png");
   background-repeat: no-repeat;
   background-size: cover;
-  /* background-position: center center; */
   text-align: center;
 }
 .crf-hero h1,
