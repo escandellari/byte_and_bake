@@ -31,47 +31,36 @@
         <div class="card-body">
           <div style="position: relative">
             <div class="row">
-              <div style="width: 50%;">
+              <div class="column">
                 {% if object.image %}
                   <img src="{{ object.image.url }}" style="width: 100%">
                 {% endif %}
               </div>
-              <div style="width: 50%;">
-                <p>
-                  {% comment %} <img src="{% static 'icon/003-apron.png' %}"
-      style="font-size:36px;
-             color:black"> {% endcomment %}
-                  <strong>&emsp;Preparation Time:</strong>
-                  {{ object.prep_time }}
-                </p>
-                <p>
-                  {% comment %} <img src="{% static 'icon/001-meal.png' %}"
-      style="font-size:36px;
-             color:black"> {% endcomment %}
-                  <strong>&emsp;Cooking Time:</strong> {{ object.cook_time }}
-                </p>
-                <p>
-                  {% comment %} <img src="{% static 'icon/004-stopwatch.png' %}"
-      style="font-size:36px;
-             color:black"> {% endcomment %}
-                  <strong>&emsp;Proving Time:</strong> {{ object.proof_time }}
-                </p>
-                <p>
-                  {% comment %} <img src="{% static 'icon/002-cloche.png' %}"
-      style="font-size:36px;
-             color:black"> {% endcomment %}
-                  <strong>&emsp;Makes:</strong> {{ object.serves }}
-                </p>
-              </div>
-              <div style="width: 45%;">
+              <div class="column">
+                <strong>Preparation Time:</strong>
+                {{ object.prep_time }}
                 <br>
+                <strong>Cooking Time:</strong> {{ object.cook_time }}
+                <br>
+                <strong>Proving Time:</strong> {{ object.proof_time }}
+                <br>
+                <strong>Makes:</strong> {{ object.serves }}
+                <br>
+                <ul class="no-bullets">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <div class="column">
                 <h4>
                   <strong>Ingredients:</strong>
                 </h4>
+                {% for  in  %}{% endfor %}
                 {{ object.ingredients|safe }}
               </div>
-              <div style="width: 55%;">
-                <br>
+              <div class="column">
                 <h4>
                   <strong>Method:</strong>
                 </h4>

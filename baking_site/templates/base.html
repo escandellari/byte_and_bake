@@ -26,114 +26,117 @@
     </title>
   </head>
   <body>
-    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'index' %}">Byte and Bake</a>
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                aria-controls="navbarNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle"
-                 role="button"
-                 href="{% url 'recipes' %}"
-                 data-bs-hover="dropdown"
-                 aria-expanded="false">Recipes</a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item d-md-none" href="{% url 'recipes' %}">All recipes</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'category' 'bread' %}">Bread</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'category' 'cakes' %}">Cakes</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'category' 'biscuits' %}">Biscuits</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'category' 'worldwide' %}">Worldwide</a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">Search.. coming soon</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'blog_home' %}">Blog</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'converter' %}">Converter</a>
-            </li>
-            {% if user.is_authenticated %}
+    <div>
+      <!-- NAVIGATION -->
+      <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'index' %}">Byte and Bake</a>
+          <button class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarNav"
+                  aria-controls="navbarNav"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle"
-                   href="#"
                    role="button"
-                   data-bs-toggle="dropdown"
-                   aria-expanded="false">Add</a>
+                   href="{% url 'recipes' %}"
+                   data-bs-hover="dropdown"
+                   aria-expanded="false">Recipes</a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="{% url 'post_add' %}">Add Post</a>
+                    <a class="dropdown-item d-md-none" href="{% url 'recipes' %}">All recipes</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'recipe_add' %}">Add Recipe</a>
+                    <a class="dropdown-item" href="{% url 'category' 'bread' %}">Bread</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{% url 'category_add' %}">Add Category</a>
+                    <a class="dropdown-item" href="{% url 'category' 'cakes' %}">Cakes</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'category' 'biscuits' %}">Biscuits</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{% url 'category' 'worldwide' %}">Worldwide</a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Search.. coming soon</a>
                   </li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'recipe_add' %}"><i class="fa-solid fa-file-circle-plus"></i></a>
+                <a class="nav-link" href="{% url 'blog_home' %}">Blog</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'editProfile' %}"><i class="fa-solid fa-user-pen"></i></a>
+                <a class="nav-link" href="{% url 'converter' %}">Converter</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}"><i class="fa-solid fa-user-plus"></i></a>
-              </li>
-              <li class="nav-item">
-                <a href="{% url 'logout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i></a>
-              </li>
+              {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle"
+                     href="#"
+                     role="button"
+                     data-bs-toggle="dropdown"
+                     aria-expanded="false">Add</a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" href="{% url 'post_add' %}">Add Post</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'recipe_add' %}">Add Recipe</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'category_add' %}">Add Category</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'recipe_add' %}"><i class="fa-solid fa-file-circle-plus"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'editProfile' %}"><i class="fa-solid fa-user-pen"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'register' %}"><i class="fa-solid fa-user-plus"></i></a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'logout' %}" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i></a>
+                </li>
+              {% endif %}
+            </ul>
+            {% if not user.is_authenticated %}
+              <a href="{% url 'login' %}" class="nav-link"><i class="fa-solid fa-right-to-bracket"></i></a>
             {% endif %}
-          </ul>
-          {% if not user.is_authenticated %}
-            <a href="{% url 'login' %}" class="nav-link"><i class="fa-solid fa-right-to-bracket"></i></a>
-          {% endif %}
+          </div>
         </div>
+      </nav>
+      <script>
+        $(document).ready(function () {
+          if($(window).width() <= 831) {
+            $(".nav-link.dropdown-toggle").removeAttr("data-bs-hover");
+            $(".nav-link.dropdown-toggle").attr("data-bs-toggle", "dropdown");
+        }
+        });
+      </script>
+      <div class="container-fluid">
+        {% block content %}
+          <!-- Content Goes here -->
+        {% endblock content %}
       </div>
-    </nav>
-    <script>
-      $(document).ready(function () {
-        if($(window).width() <= 831) {
-          $(".nav-link.dropdown-toggle").removeAttr("data-bs-hover");
-          $(".nav-link.dropdown-toggle").attr("data-bs-toggle", "dropdown");
-      }
-      });
-    </script>
-    <div class="container-fluid">
-      {% block content %}
-        <!-- Content Goes here -->
-      {% endblock content %}
+      <!-- Footer -->
+      <footer class="py-3 bg-grey">
+        <p class="m-0 text-dark text-center ">Copyright &copy; Byte & Bake</p>
+      </footer>
     </div>
-    <!-- Footer -->
-    <footer class="py-3 bg-grey">
-      <p class="m-0 text-dark text-center ">Copyright &copy; Byte & Bake</p>
-    </footer>
   </body>
 </html>

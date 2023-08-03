@@ -3,10 +3,41 @@
 
 body {
   font-family: "Exo 2", sans-serif;
+  /* background-color: #f6ddbe; */
 }
 
 .container {
   margin: 0 auto;
+}
+
+.btn {
+  background: #efcda4;
+  background-image: -webkit-linear-gradient(top, #efcda4, #e4bd94);
+  background-image: -moz-linear-gradient(top, #efcda4, #e4bd94);
+  background-image: -ms-linear-gradient(top, #efcda4, #e4bd94);
+  background-image: -o-linear-gradient(top, #efcda4, #e4bd94);
+  background-image: linear-gradient(to bottom, #efcda4, #e4bd94);
+  /* -webkit-border-radius: 28;
+  -moz-border-radius: 28; */
+  /* border-radius: 28px; */
+  -webkit-box-shadow: 0px 1px 3px #666666;
+  -moz-box-shadow: 0px 1px 3px #666666;
+  box-shadow: 0px 1px 3px #666666;
+  color: #ffffff;
+  /* font-size: 20px; */
+  /* padding: 10px 20px 10px 20px; */
+  border: solid #efcda4 2px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #e4bd94;
+  background-image: -webkit-linear-gradient(top, #e4bd94, #e4bd94);
+  background-image: -moz-linear-gradient(top, #e4bd94, #e4bd94);
+  background-image: -ms-linear-gradient(top, #e4bd94, #e4bd94);
+  background-image: -o-linear-gradient(top, #e4bd94, #e4bd94);
+  background-image: linear-gradient(to bottom, #e4bd94, #e4bd94);
+  text-decoration: none;
 }
 
 .logo {
@@ -15,13 +46,6 @@ body {
 
 .card {
   box-shadow: 0 16px 48px #e3e7eb;
-}
-
-/* Float four columns side by side */
-.column {
-  float: left;
-  width: 25%;
-  padding: 0 10px;
 }
 
 /* Remove extra left and right margins, due to padding */
@@ -34,6 +58,28 @@ body {
   content: "";
   display: table;
   clear: both;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
 }
 
 .card-footer {
@@ -56,15 +102,89 @@ a:active {
   text-decoration: underline;
 }
 
+ul.no-bullets {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 .dropdown:hover .dropdown-menu {
   display: block;
 }
 
-/* Responsive columns */
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
+/* HERO */
+.crf-hero {
+  background-image: url("../img/all_recipes_banner.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-position: center center; */
+  text-align: center;
+}
+.crf-hero h1,
+.crf-hero h2 {
+  font-size: 63px;
+  margin: 0;
+  flex: inherit;
+  line-height: 0.9;
+}
+.crf-hero h1 {
+  left: -30px;
+}
+.crf-hero h2 {
+  color: #faa541;
+}
+.crf-hero p.lead {
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* Big screen */
+@media only screen and (min-width: 1200px) {
+  .crf-hero {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    background-position: 25% 75%;
+    background-size: 100%;
+    /* background-position: center center; */
+  }
+
+  .crf-hero .container {
+    max-width: 1170px;
+    padding: 15px;
+    height: 450px;
+    background-position: bottom center;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .crf-hero {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    background-position: 70% 0;
+    background-size: 180%;
+    background-position: center center;
+  }
+  .crf-hero .container {
+    /* margin-top: auto; */
+    /* background-color: #faa541; */
+    padding: 15px;
+    height: 200px;
+  }
+  .crf-hero h1 {
+    left: 0;
+  }
+  .crf-hero h2,
+  .crf-hero p.lead {
+    color: white;
+  }
+  .crf-hero p.lead {
+    margin-top: 5px;
+    margin-bottom: 0;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .crf-hero h1,
+  .crf-hero h2 {
+    /* font-size: 55px; */
+    font-size: 300%;
   }
 }
