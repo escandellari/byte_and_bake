@@ -10,7 +10,7 @@ body {
   margin: 0 auto;
 }
 
-.btn {
+.btn-recipes {
   background: #efcda4;
   background-image: -webkit-linear-gradient(top, #efcda4, #e4bd94);
   background-image: -moz-linear-gradient(top, #efcda4, #e4bd94);
@@ -30,7 +30,7 @@ body {
   text-decoration: none;
 }
 
-.btn:hover {
+.btn-recipes:hover {
   background: #e4bd94;
   background-image: -webkit-linear-gradient(top, #e4bd94, #e4bd94);
   background-image: -moz-linear-gradient(top, #e4bd94, #e4bd94);
