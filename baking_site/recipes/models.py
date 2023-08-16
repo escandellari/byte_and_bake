@@ -1,8 +1,8 @@
-from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify as default_slugify
 from django.urls import reverse
+from tinymce.models import HTMLField
 
 
 class Category(models.Model):
@@ -32,9 +32,9 @@ class Recipe(models.Model):
     proof_time = models.CharField(max_length=200, blank=True, null=True)
     serves = models.CharField(max_length=200, blank=True, null=True)
 
-    ingredients = RichTextField(blank=True, null=True)
-    method = RichTextField(blank=True, null=True)
-    story_time = RichTextField(blank=True, null=True, default="")
+    ingredients = HTMLField(blank=True, null=True)
+    method = HTMLField(blank=True, null=True)
+    story_time = HTMLField(blank=True, null=True, default="")
 
     date_published = models.DateTimeField(auto_now_add=True)
 

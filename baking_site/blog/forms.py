@@ -1,11 +1,7 @@
 from django import forms
+from tinymce.widgets import TinyMCE
 
-from .models import Category, Post
-
-# try:
-#     categories_list = list(Category.objects.all().values_list("category_name", "category_name"))
-# except NameError:
-#     categories_list = []
+from .models import Post
 
 categories_list = [
     ("baking", "baking"),
@@ -34,11 +30,7 @@ class PostForm(forms.ModelForm):
                 },
             ),
             "snippet": forms.TextInput(attrs={"class": "form-control"}),
-            "body": forms.Textarea(
-                attrs={
-                    "class": "form-control",
-                }
-            ),
+            "body": TinyMCE(attrs={"class": "form-control", "cols": 80, "rows": 30}),
         }
 
 
@@ -65,9 +57,5 @@ class EditForm(forms.ModelForm):
                 },
             ),
             "snippet": forms.TextInput(attrs={"class": "form-control"}),
-            "body": forms.Textarea(
-                attrs={
-                    "class": "form-control",
-                }
-            ),
+            "body": TinyMCE(attrs={"class": "form-control", "cols": 80, "rows": 30}),
         }

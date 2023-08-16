@@ -1,8 +1,8 @@
-from ckeditor.fields import RichTextField
 from django.contrib.auth.models import User
 from django.db import models
 from django.template.defaultfilters import slugify as default_slugify
 from django.urls import reverse
+from tinymce.models import HTMLField
 
 
 class Category(models.Model):
@@ -27,7 +27,7 @@ class Post(models.Model):
     category = models.CharField(max_length=255, default="baking")
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    body = RichTextField(blank=True, null=True)
+    body = HTMLField(blank=True, null=True)
     snippet = models.CharField(max_length=150)
     date_published = models.DateTimeField(auto_now_add=True)
 

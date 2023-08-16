@@ -29,6 +29,7 @@ urlpatterns = [
     path("converter/", include("converter.urls")),
     path("registration/", include("django.contrib.auth.urls")),
     path("registration/", include("registration.urls")),
+    path("tinymce/", include("tinymce.urls")),
 ]
 
 if settings.DEBUG:

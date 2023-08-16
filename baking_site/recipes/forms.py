@@ -1,4 +1,5 @@
 from django import forms
+from tinymce.widgets import TinyMCE
 
 from .models import Category, Recipe
 
@@ -28,10 +29,10 @@ class AddRecipeForm(forms.ModelForm):
             "cook_time": forms.TextInput(attrs={"class": "form-control"}),
             "proof_time": forms.TextInput(attrs={"class": "form-control"}),
             "serves": forms.TextInput(attrs={"class": "form-control"}),
-            "ingredients": forms.Textarea(attrs={"class": "form-control"}),
-            "method": forms.Textarea(attrs={"class": "form-control"}),
-            "story_time": forms.Textarea(attrs={"class": "form-control"}),
             "snippet": forms.TextInput(attrs={"class": "form-control"}),
+            "ingredients": TinyMCE(attrs={"class": "form-control", "cols": 80, "rows": 30}),
+            "method": TinyMCE(attrs={"class": "form-control", "cols": 80, "rows": 30}),
+            "story_time": TinyMCE(attrs={"class": "form-control", "cols": 80, "rows": 30}),
         }
 
     category = forms.ModelMultipleChoiceField(
@@ -65,9 +66,9 @@ class EditRecipeForm(forms.ModelForm):
             "cook_time": forms.TextInput(attrs={"class": "form-control"}),
             "proof_time": forms.TextInput(attrs={"class": "form-control"}),
             "serves": forms.TextInput(attrs={"class": "form-control"}),
-            "ingredients": forms.Textarea(attrs={"class": "form-control"}),
-            "method": forms.Textarea(attrs={"class": "form-control"}),
-            "story_time": forms.Textarea(attrs={"class": "form-control"}),
+            "ingredients": TinyMCE(attrs={"class": "form-control", "cols": 80, "rows": 30}),
+            "method": TinyMCE(attrs={"class": "form-control", "cols": 80, "rows": 30}),
+            "story_time": TinyMCE(attrs={"class": "form-control", "cols": 80, "rows": 30}),
         }
 
     category = forms.ModelMultipleChoiceField(

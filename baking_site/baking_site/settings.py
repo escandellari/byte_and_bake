@@ -50,10 +50,10 @@ INSTALLED_APPS = [
     "recipes",
     "registration",
     # External packages
-    "ckeditor",
     "crispy_forms",
     "crispy_bootstrap5",
     "django_rename_app",
+    "tinymce",
 ]
 
 MIDDLEWARE = [
@@ -144,8 +144,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "static"
-# STATICFILES_DIRS = [BASE_DIR / "static"]
+if DEBUG:
+    STATICFILES_DIRS = [BASE_DIR / "static"]
+else:
+    STATIC_ROOT = BASE_DIR / "static"
 
 # Path where media is stored
 MEDIA_URL = "/media/"
