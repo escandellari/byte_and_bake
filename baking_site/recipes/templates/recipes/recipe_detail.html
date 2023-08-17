@@ -1,29 +1,30 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block title %}
-  {{ object.title }}
+  {{ recipe.title }}
 {% endblock title %}
 {% block content %}
   <div class="container">
-    <h1>{{ object.title }}</h1>
+    <h1>{{ recipe.title }}</h1>
     <p class=" text-muted">
-      {{ object.author.first_name }} | {{ object.date_published }} |
-      {% for category in object.category.all %}
+      {{ recipe.author.first_name }} | {{ recipe.date_published }} |
+      {% for category in recipe.category.all %}
         {{ category.name | title }}
         {% if not forloop.last %}|{% endif %}
       {% endfor %}
-      {% if user.is_authenticated and user.id == object.author.id %}
+      {% if user.is_authenticated and user.id == recipe.author.id %}
         |
-        <a href="{% url 'recipe_edit' object.slug %}">Edit</a>
+        <a href="{% url 'recipe_edit' recipe.slug %}">Edit</a>
         |
-        <a href="{% url 'recipe_delete' object.slug %}">Delete</a>
+        <a href="{% url 'recipe_delete' recipe.slug %}">Delete</a>
       {% endif %}
     </p>
     <div class="row">
-      {% if object.story_time %}
+      {% if recipe.story_time %}
         <div class="card">
           <div class="card-body">
-            <p class="card-text">{{ object.story_time|safe }}</p>
+            <p class="card-text">{{ recipe.story_time|safe }}</p>
           </div>
         </div>
       {% endif %}
@@ -32,19 +33,19 @@
           <div style="position: relative">
             <div class="row">
               <div class="column">
-                {% if object.image %}
-                  <img src="{{ object.image.url }}" style="width: 100%">
+                {% if recipe.image %}
+                  <img src="{{ recipe.image.url }}" style="width: 100%">
                 {% endif %}
               </div>
               <div class="column">
                 <strong>Preparation Time:</strong>
-                {{ object.prep_time }}
+                {{ recipe.prep_time }}
                 <br>
-                <strong>Cooking Time:</strong> {{ object.cook_time }}
+                <strong>Cooking Time:</strong> {{ recipe.cook_time }}
                 <br>
-                <strong>Proving Time:</strong> {{ object.proof_time }}
+                <strong>Proving Time:</strong> {{ recipe.proof_time }}
                 <br>
-                <strong>Makes:</strong> {{ object.serves }}
+                <strong>Makes:</strong> {{ recipe.serves }}
                 <br>
                 <ul class="no-bullets">
                   <li></li>
@@ -57,17 +58,56 @@
                 <h4>
                   <strong>Ingredients:</strong>
                 </h4>
-                {{ object.ingredients|safe }}
+                {{ recipe.ingredients|safe }}
               </div>
               <div class="column">
                 <h4>
                   <strong>Method:</strong>
                 </h4>
-                {{ object.method|safe }}
+                {{ recipe.method|safe }}
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="col-md-8 card mb-4 mt-3 ">
+      <div class="card-body">
+        <!-- comments -->
+        {% with comments.count as total_comments %}
+          <h2>{{ total_comments }} comments</h2>
+          <p>
+          {% endwith %}
+          {% for comment in comments %}
+          </p>
+          <div class="comments" style="padding: 10px;">
+            <p class="font-weight-bold">
+              {{ comment.name }}
+              <span class=" text-muted font-weight-normal">{{ comment.created_on }}</span>
+            </p>
+            {{ comment.body | linebreaks }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-8 card mb-4  mt-3 ">
+      <div class="card-body">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}"
+                 role="alert">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+        {% if new_comment %}
+          <div class="alert alert-success" role="alert">Your comment is awaiting moderation</div>
+        {% else %}
+          <h3>Leave a comment</h3>
+          <form method="post" style="margin-top: 1.3em;">
+            {{ comment_form | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+          </form>
+        {% endif %}
       </div>
     </div>
   </div>

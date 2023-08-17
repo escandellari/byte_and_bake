@@ -1,7 +1,7 @@
 from django import forms
 from tinymce.widgets import TinyMCE
 
-from .models import Category, Recipe
+from .models import Category, Comment, Recipe
 
 
 class AddRecipeForm(forms.ModelForm):
@@ -76,3 +76,9 @@ class EditRecipeForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
         required=False,
     )
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ("name", "email", "body")

@@ -1,10 +1,11 @@
+from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, UpdateView
 
-from .forms import AddRecipeForm, EditRecipeForm
+from .forms import AddRecipeForm, CommentForm, EditRecipeForm
 from .models import Category, Recipe
 
 
@@ -12,15 +13,13 @@ def recipes_view(request):
     recipe_list = Recipe.objects.all()
     banner = static("img/all_recipes_banner.png")
 
-    return render(
-        request,
-        "recipes/recipe_index.html",
-        {
-            "recipe_list": recipe_list,
-            "category_name": "All the Recipes",
-            "banner": banner,
-        },
-    )
+    template_name = "recipes/recipe_index.html"
+    context = {
+        "recipe_list": recipe_list,
+        "category_name": "All the Recipes",
+        "banner": banner,
+    }
+    return render(request, template_name, context=context)
 
 
 def category_view(request, name):
@@ -54,8 +53,38 @@ def recipe_add_view(request):
             print(recipe_form.errors.as_data())
             print("***********************")
     else:
+        template_name = "recipes/recipe_add.html"
         context = {"recipe_form": recipe_form}
-        return render(request, "recipes/recipe_add.html", context=context)
+        return render(request, template_name, context=context)
+
+
+def recipe_detail_view(request, slug):
+    template_name = "recipes/recipe_detail.html"
+    recipe = get_object_or_404(Recipe, slug=slug)
+    comments = recipe.comments.filter(active=True).order_by("-created_on")
+    new_comment = None
+
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.recipe = recipe
+            new_comment.save()
+            messages.success(request, "Your comment is awaiting moderation")
+            return redirect(request.path_info)
+    else:
+        comment_form = CommentForm()
+
+    return render(
+        request,
+        template_name,
+        {
+            "recipe": recipe,
+            "comments": comments,
+            "new_comment": new_comment,
+            "comment_form": comment_form,
+        },
+    )
 
 
 class EditRecipeView(UpdateView):

@@ -59,3 +59,18 @@ class Recipe(models.Model):
     def slugify(self, tag):
         slug = default_slugify(tag)
         return slug
+
+
+class Comment(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="comments")
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["created_on"]
+
+    def __str__(self):
+        return "Comment {} by {}".format(self.body, self.name)
